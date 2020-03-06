@@ -1,0 +1,612 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{paper}
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\newcommand{\y}{\gamma}
+\newcommand{\dy}{\dot\gamma}
+\newcommand{\ddy}{\ddot\gamma}
+
+\setcounter{section}{-1}
+%https://tex.stackexchange.com/questions/107470/getting-section-numbering-to-start-at-0
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section] % reset theorem numbering for each chapter
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{col}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
+\newtheorem{exmp}[thm]{Example} % same for example numbers
+\newtheorem{obsv}[thm]{Observation}
+
+%https://tex.stackexchange.com/questions/45817/theorem-definition-lemma-problem-numbering
+
+\makeatletter
+\newcommand*{\toccontents}{\@starttoc{toc}}
+\makeatother
+
+%https://tex.stackexchange.com/questions/296207/reducing-space-between-items-of-reference
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}
+  {\settowidth}
+  {\setlength{\itemsep}{0pt plus 0.1pt}\settowidth}
+  {}{}
+\apptocmd{\thebibliography}
+  {\footnotesize}
+  {}{}
+
+\setlength{\droptitle}{-60pt}
+
+\begin{document}
+\author{Lectured by \textsc{Univ.Prof. Dr. Ivan Izmestiev}, latexed by \textsc{Florian Bogner}}
+\title{Differential Geometry}
+\maketitle
+
+\toccontents
+
+\section{Introduction}
+
+The course will consist of:
+
+\begin{itemize}
+\item Curves in $\mathbb R^2$ and $\mathbb R^3$
+
+We will look at \emph{length}, \emph{curvature}, as well as \emph{torsion} for Curves in $\mathbb R^3$.
+
+\item Surfaces
+
+We will look at \emph{area} and \emph{curvature}. For curvature, there are two different notions:
+\begin{itemize}
+\item extrinsic: How much is the surface bent in different directions?
+\item intrinsic: If we bend the surface without stretching and shrinking, then some ``curvedness'' remains.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.6\textwidth]{img/intrinsic-curvature}
+\caption{Convex surface and saddle surface.}
+\label{fig:intrinsic}
+\end{figure}
+
+The area of a disk with radius $r$ on a curved surface is different from that on an intrinsically flat surface. It is a manifestation of intrinsic surface curvature.
+
+\begin{itemize}
+\item On a convex surface the area is smaller than $\pi r^2$
+\item On a saddle surface the area is bigger than $\pi r^2$
+\end{itemize}
+
+
+\item Riemannian Geometry
+
+A Riemannian metric on a domain $U \subset \mathbb R^n$ is a length measurement inspired by differential geometry. There is no extrinsic curvature (bendedness) but the intrinsic curvature is present.
+
+For example: In General Relativity a mass bends the space\footnote{Actually, the space-time is bent, and the metric is not Riemannian but Lorentzian.}, see Figure \ref{fig:gravlens}.
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.4\textwidth]{img/gravlens1}
+\includegraphics[width = 0.4\textwidth]{img/gravlens2}
+\caption{Gravitational lenses are evidence of bent space.}
+\label{fig:gravlens}
+\end{figure}
+
+
+Global differential and Riemannian geometry;
+Up to now we were looking at arbitrarily small pieces of curves and surfaces. This is local differential geometry.
+
+Global differential geometry deals with manifolds ``in the large''.
+Often it connects geometry with topology.
+
+
+Theorem (Four vertex theorem): Every smooth closed non-self-intersecting curve in the plane has at least for local extrema of curvature.
+
+Theorem (Consequence of Gauss-Bonnet): The torus does not admit metrics with everywhere positive curvature.
+
+Theorem (Geometrization: Thurston-Hamilton-Perelman): Every closed 3-dimensional manifold can be cut into pieces which admit special metrics (most common is the metric of constant negative curvature, the hyperbolic metric).
+
+\end{itemize}
+
+
+
+\section{Curves}
+
+\subsection{Parametric Curves}
+
+\begin{defn}
+A \emph{Curve} is a trajectory of a point (on the plane or in the space).
+\begin{equation*}
+\gamma: I \to \mathbb R^2
+\end{equation*}
+with $I \subset \mathbb R$ being an interval and $\gamma$ continuous.
+\end{defn}
+
+There are ``strange'' continuous curves, for example:
+\begin{itemize}
+\item $\gamma = $ const. $\Rightarrow$ The curve is a point.
+
+\item Peano Curve and Hilbert Curve, which are space-filling curves, i.e.: $\gamma(I) = [0,1]^2 = \blacksquare$.
+
+\item The boundary of the Koch Snowflake.
+\end{itemize}
+
+
+To exclude those, we require differentiability: $C^1$ gives us tangents, $C^2$ gives us curvature, but $C^\infty$ is best.
+
+\begin{defn}
+A \emph{smooth parametric curve} in $\mathbb R^n$ is a $C^\infty$-map 
+\begin{equation*}
+\gamma: I \to \mathbb R^n
+\end{equation*}
+where $I \subset \mathbb R$ is an interval in $\mathbb R$. Let $t_0 \in I$. The vector 
+\begin{equation*}
+\dot\gamma(t_0) = \frac{dy}{dt}\Big|_{t = t_0}
+\end{equation*}
+is called the \emph{velocity vector} of $\gamma$ at $t_0$.
+\end{defn}
+
+
+\begin{figure}[H]
+\centering
+\def\svgwidth{0.3\textwidth}
+\input{img/velocity-vector.pdf_tex}
+\caption{Velocity vector in $t_0$}
+\label{fig:velocity-vector}
+\end{figure}
+
+
+\begin{defn}
+If $\dot\gamma(t_0) = 0$ the $t_0$ is called a \emph{singular point} of $\gamma$. Otherwise $t_0$ is called a \emph{regular point}. If all points are regular, then we call $\gamma$ \emph{regular}.
+\end{defn}
+
+\begin{exmp}
+Consider the curve
+\begin{equation*}
+\gamma(t) = (t^3, t^2) \text{ with } I = (-\infty, \infty)
+\end{equation*}
+Let us search for singularities:
+\begin{equation*}
+\dot\gamma(t) = (3t^2, 2t) \stackrel{!}{=} (0,0) \Leftrightarrow t = 0
+\end{equation*}
+
+\begin{figure}[H]
+\centering
+\def\svgwidth{0.7\textwidth}
+\input{img/cusp.pdf_tex}
+\caption{Note the singular point in $(0,0)$. This is called a \emph{cusp}.}
+\label{fig:cusp}
+\end{figure}
+\end{exmp}
+
+
+\begin{defn}
+At a regular point a curve has a \emph{tangent}:
+
+\begin{equation*}
+l(t) = \gamma(t)_0) + (t-t_0) \cdot \dot\gamma(t_0)
+\end{equation*}
+
+This tangent approximates the curve in first order, i.e.:
+\begin{equation*}
+\gamma(t) = l(t) + o(t-t_0)
+\end{equation*}
+
+\end{defn}
+
+
+\begin{defn}
+\emph{Parameter change}: Consider $\gamma: I \to \mathbb R^n$ Let $\phi: J \to I$ where $J$ is another Interval and $\phi$ is a diffeomorphism ($\phi$ bijective and differentiable, $\phi^{-1}$ also differentiable.)
+
+Then, the curve
+\begin{equation*}
+\delta : J \to \mathbb R^n : s \mapsto \gamma \circ \phi(s)
+\end{equation*}
+is called a \emph{reparametrization} of $\gamma$.
+\end{defn}
+
+\begin{lem}
+Regularity is preserved under reparametrization. A point $s_0 \in J$ is a regular point of $\delta$ if and only if $\gamma(s_0)$ is a regular point of $\gamma$.
+\end{lem}
+
+\emph{Proof:} By chain rule: 
+\begin{equation*}
+\dot\delta(s_0) = \dot\gamma(\phi(s_0)) \cdot \phi'(s_0)
+\end{equation*}
+Since $\phi'(s_0) \neq 0$ because $\phi^{-1}$ is differentiable, one has $\dot\delta(s_0) \neq 0 \Leftrightarrow \dot\gamma(\phi(s_0)) \neq 0$. \hfill $\Box$
+
+
+
+\subsection{Length and the natural parameter}
+
+\begin{defn}
+Let $\gamma: [a,b] \to \mathbb R^n$ be a smooth curve. Its length is defined as:
+
+\begin{equation*}
+L(\gamma) = \int_a^b ||\gamma\dot(t)|| dt
+\end{equation*}
+\end{defn}
+
+Motivation: $\int_a^b ||\gamma\dot(t)|| dt $ is the supremum of lengths of inscribed polygons.
+
+\begin{figure}[H]
+\centering
+\def\svgwidth{0.7\textwidth}
+\input{img/inscribed-polygon.pdf_tex}
+\caption{A curve and an inscribed polygon.}
+\label{fig:inscribed-polygon}
+\end{figure}
+
+
+\begin{lem}
+The length of an curve is always longer than the line between the endpoints, i.e.:
+\begin{equation*}
+\int_{t_i}^{t_{i+1}} ||\dot\gamma(t)|| dt \geq ||\gamma(t_{i+1}) - \gamma(t_i)||
+\end{equation*}
+\end{lem}
+\emph{Proof:} $\int_{t_i}^{t_{i+1}} ||\dot\gamma(t)|| dt \geq ||\int_{t_i}^{t_{i+1}} \dot\gamma(t) dt|| =  ||\gamma(t_{i+1}) - \gamma(t_i)||$ \hfill $\Box$
+
+\begin{col}
+$L(\gamma)$ is greater or equal to the length of any inscribed polygon.
+\end{col}
+
+
+\begin{defn}
+A curve $\gamma$ is called a \emph{unit-speed curve} if $\forall t : ||\dot\gamma(t)|| = 1$. For unit-speed curves it holds that $L(\gamma) = b-a$. Unit-speed curves are also called \emph{arc-length parametrizations.}
+\end{defn}
+
+
+\begin{thm}
+Every regular curve has a unit-speed reparametrization.
+\end{thm}
+\emph{Proof:} Let $\gamma: I \to \mathbb R^n$ be regular. Fix $a \in I$ and define
+\begin{equation*}
+\psi: I \to \mathbb R: t \mapsto \int_a^t ||\gamma\dot(s)|| ds.
+\end{equation*}
+
+Claim: $\psi$ is the inverse of the $\phi$ that we are looking for.
+$\psi$ is continuously differentiable: $\psi'(t) = ||\dot\gamma(t)|| > 0$ and therefore $\psi$ is monotone and $\psi^{-1}$ is also differentiable.
+Let $J = \psi(I)$ and $\phi = \psi^{-1}$. One has
+\begin{equation*}
+\phi'(s) = \frac{1}{\psi'(\phi(s))} = \frac{1}{||\gamma\dot(\phi(s))||}.
+\end{equation*}
+Therefore: 
+\begin{equation*}
+\dot\delta(s) = \dot\gamma(\phi(s)) \cdot \phi'(s) = \frac{\dot\gamma(\phi(s))}{||\dot\gamma(\phi(s))||}
+\end{equation*}
+which is a unit vector. \hfill $\Box$
+
+
+\begin{defn}
+If $||\dot\gamma(t)|| = 1$, then $t$ is called a \emph{natural parameter}.
+
+A natural parameter is unique up to starting point and the direction.
+\end{defn}
+
+
+\subsection{Other definitions of a curve}
+
+
+\begin{obsv}
+Let $f: I \to \mathbb R$ be smooth. Then the graph of $f$ can be parameterized: $\gamma(t) = (t, f(t))$. Since the first component never has a derivative of $0$, $\gamma$ is regular.
+\end{obsv}
+
+\begin{obsv}
+Let $U \subset \mathbb R^2$. Let $F: U \to \mathbb R$ be a smooth function with non-vanishing gradient, i.e. $\nabla F \neq 0$ everywhere.
+
+Then by the Implicit Function Theorem locally $\{(x,y)|F(x,y) = 0\}$ can be represented either as the graph of $y = f(x)$ or $x = f(y)$, therefore it is locally a parametric curve.
+\end{obsv}
+
+
+\begin{exmp}
+Consider the circle or generally closed curves. $\gamma = (cos(t), sin(t))$. But what should $I$ be? $[0, 2\pi)$ or $(-\infty, \infty)$
+\end{exmp}
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.7\textwidth]{img/lemniscate}
+\caption{Lemniscate of Bernoulli}
+\label{fig:lemniscate}
+\end{figure}
+
+
+\begin{exmp}
+Lemniscate of Bernoulli:
+
+Consider the set depicted in Figure \ref{fig:lemniscate}:
+\begin{equation*}
+\left\{p \in \mathbb R^2 ~|~ dist\left(p, \left(1,0\right)\right) \cdot dist\left(p, \left(-1,0\right)\right) = 1\right\}
+\end{equation*}
+
+Is this a curve? Lets look at it from various points of view. The equation from the set above can be rewritten in a more concise from: 
+\begin{equation*}
+F(x,y) := (x^2+y^2)^2 - 2(x^2-y^2) = 0
+\end{equation*}
+
+We can apply the Implicit Function Theorem everywhere except in the point $(0,0)$ since
+\begin{equation*}
+\nabla F = 0, F = 0 \Leftrightarrow x = 0, y = 0
+\end{equation*}
+
+This yields the parametric equations:
+\begin{align*}
+\gamma_x(t) &= \frac{\sqrt 2 cos(t)}{1+sin^2(t)} \\
+\gamma_y(t) &= \frac{\sqrt 2 cos(t) sin(t)}{1+sin^2(t)} \\
+\text{with }\forall t:\dot\gamma(t) &\neq 0 
+\end{align*}
+
+But what about the point $(0,0)$? This brings us to the following definitions:
+\end{exmp}
+
+
+\begin{defn}
+\begin{itemize}
+\item The image of a smooth map $I \to \mathbb R^2$ with non-vanishing derivative is called \emph{immersed curve}.
+
+\item A Subset of $\mathbb R^2$ which in the neighborhood of every point can be represented as $\{(x,y) ~|~ F(x,y) = 0\}$ with $\nabla F \neq 0$ is called an \emph{embedded curve}.
+
+\item A \emph{generic} immersed curve has no multiple intersections and no self-tangencies. A non-generic curve can be made generic by a small perturbation.
+\end{itemize}
+\end{defn}
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.7\textwidth]{img/nongeneric}
+\caption{Non-generic Curves: multiple intersection on the left, self-tangency on the right}
+\label{fig:non-generic}
+\end{figure}
+
+
+\subsection{Curvature of Curves}
+
+\begin{defn}
+Let $\gamma$ be a unit-speed curve in $\mathbb R^n$. Its \emph{curvature} $\kappa(t)$ at the point $\gamma(t)$ is  defined to be $|| \ddot\gamma(t)||$. The curvature of an arbitrary regular curve is defined as the curvature of  its unit-speed reparametrization.
+\end{defn}
+
+\begin{lem}
+A curve has zero curvature everywhere if and only if it is a straight line segment.
+\end{lem}
+\emph{Proof:} Take the unit-speed reparametrization $\gamma$. Then 
+\begin{equation*}
+\ddot\gamma(t) = 0 \Leftrightarrow \dot\gamma(t) = \text{const.} \Leftrightarrow \gamma(t) = a\cdot t+b
+\end{equation*}
+\hfill $\Box$
+
+\begin{lem}
+The curvature of a circle of radius $R$ is $\frac{1}{R}$.
+\end{lem}
+
+\emph{Proof:} A unit-speed parametrization of the circle is:
+
+\begin{align*}
+\gamma(t) &= R \cdot \left(\cos\left(\frac{t}{R}\right), \sin\left(\frac{t}{R}\right)\right) \\
+\dot\gamma(t) &= \left(-\sin\left(\frac{t}{R}\right), \cos\left(\frac{t}{R}\right)\right) \\
+\ddot\gamma(t) &= -\frac{1}{R} \cdot \left(\cos\left(\frac{t}{R}\right), \sin\left(\frac{t}{R}\right)\right) \\
+&\text{thus: } ||\ddot\gamma(t)|| = \frac{1}{R} 
+\end{align*}
+\hfill $\Box$
+
+\begin{figure}
+\centering
+\includegraphics[width = 0.7\textwidth]{img/schmiegekreis}
+\caption{Non-generic Curves: multiple intersection on the left, self-tangency on the right}
+\label{fig:non-generic}
+\end{figure}
+
+
+To compute the cuvature of a non-unit-speed curve, on may use:
+
+\begin{thm}
+The curvature of an arbitrary regular curve in $\mathbb R^2$ or $\mathbb R^3$ is:
+
+\begin{equation*}
+\kappa = \frac{||\dot\gamma \times \ddot\gamma||}{||\dot\gamma||^3}
+\end{equation*}
+
+For $a, b \in \mathbb R^2$: $||a \times b|| := |det(a~b)|$
+\end{thm}
+
+\emph{Proof:} Let $\delta = \gamma \circ \phi$ be a unit-speed reparametrization. By definition, $\kappa(t) = ||\ddot\delta(s)||$ where $t = \phi(s)$. 
+
+$\dot\delta(s) = \dot\gamma(\phi(s)) \cdot \phi'(s) = \dot\gamma(t) \cdot \phi'(s)$
+
+$\ddot\delta(s) = d/ds (\dot\gamma(t) \cdot \phi'(s)) = \ddot\gamma(t) (\phi'(s))^2 + \dot\gamma(t)\phi''(s)$
+
+Need to eliminate $\phi', \phi''$. 
+
+$||\dot\delta(s)|| = 1 \Rightarrow \phi(s) = 1/||\dot\gamma(t)||$
+
+$\delta''(s) = d/ds (1/||\dot\gamma(t)||) = d/ds ( 1/\sqrt{<\dot\gamma(t), \dot\gamma(t)>}) = -1/2 1/<\dot\gamma(t), \dot\gamma(t)>^{3/2} d/ds <\dot\gamma(t), \dot\gamma(t)> = -1/2 1/||\dot\gamma(t)||^3 2 <\ddot\gamma(t) \phi'(s), \dot\gamma(t)> = - <\ddot\gamma(t), \dot\gamma(t)> \phi'(s)/||\dot\gamma||^3 = - <\ddot\gamma(t), \dot\gamma(t)>/||\dot\gamma||^4$
+
+$<v,w>' = <v',w> + <v,w'>$ Leibnitzrule for inner products
+
+$\ddot\delta{s} = \ddot\gamma/||\dot\gamma||^2 - <\dot\gamma, \ddot\gamma> \dot\gamma / ||\dot\gamma||^4 = \ddot\gamma <\dot\gamma, \dot\gamma> - \dot\gamma<\dot\gamma, \ddot\gamma> / ||\dot\gamma||^4$
+
+BAC-CAB rule: $a \times (b\times c) = <a,c>b-<a,b>c$
+
+$\Rightarrow \ddot\delta(s) = \dot\gamma \times (\ddot\gamma \times \dot\gamma) / ||\dot\gamma||^4$
+
+Since $\dot\gamma ortho (\ddot\gamma \times \dot\gamma)$, on has $||\dot\gamma \times (\ddot\gamma \times \dot\gamma) = ||\dot\gamma|| \cdot ||\ddot\gamma \times \dot\gamma||$.
+
+Thus: $\dot\delta(s) = \dot\gamma(\phi(s)) \cdot \phi'(s) = \dot\gamma(t) \cdot \phi'(s)$
+
+ \hfill $\Box$
+
+
+\subsection{Signed curvature and the turning number}
+
+\begin{lem}
+If $\gamma$ is a unitspeed curve, then $\ddot\gamma ortho \dot\gamma$.
+\end{lem}
+
+\emph{Proof:} $||\dot\gamma|| = 1 \Rightarrow <\dot\gamma, \dot\gamma> = 1 \Rightarrow d/dt <\dot\gamma, \dot\gamma> = 0 \Rightarrow 2 <\ddot\gamma, \dot\gamma> = 0 \Rightarrow \dot\gamma ortho \ddot\gamma$ \hfill $\Box$
+
+Let $\gamma$ be a unit-speed planar curve.
+
+skizze
+
+Denote by $\nu_s(t)$ (the signed normal) the unit vector orthogonal to $\dot\gamma(t)$ such that $(\dot\gamma, \nu_s)$ form a positivly oriented Orthonormal Basis.
+
+
+\begin{defn}
+The number $\kappa_s(t)$ such that $\ddot\gamma(t) = \kappa_s(t) \nu_s(t)$ is called the \emph{signed curvature} of $\gamma$.
+\end{defn}
+
+Clearly, $|\kappa_s(t)| = \kappa(t)$.
+
+$\kappa_s < 0$ right turn
+$\kappa_s > 0$ left turn
+
+An orientation change for $\gamma$ implies a sign change for $\kappa_s(t)$.
+
+\begin{defn}
+A closed regular curve $\gamma$ is $\gamma : [a,b] \to \mathbb R^n$ such that $\gamma(a) = \gamma(b)$ and $\gamma^{(n)}(a) = \gamma^{(n)}(b)$.
+\end{defn}
+
+\begin{thm}
+The total sighend curvature of a closed regular curve is an integer multiple of $2\pi$:
+
+$\int_a^b \kappa_s(t) dt = 2k\pi.$
+\end{thm}
+
+proof next time
+
+\begin{defn}
+The number k is called the turning number of $\gamma$. This is the number of times the tangent vector rotates when running along the curve.
+\end{defn}
+
+\begin{exmp}
+Circle:
+k = 1
+Infinity Sign:
+k = 0
+Double Circle:
+k = 2
+skizzen
+\end{exmp}
+
+\begin{thm}
+(Whithney) The closed planar curves are regularly isotropic if and only if the have the same turning number.
+
+isotropic means there is a continous deformation of one curve into the other. regular isotropic means all intermediate curves are regular.
+\end{thm}
+
+skizze infty to circle counterexample.
+
+
+
+
+
+
+
+
+
+
+\section{Exercises}
+
+\subsection{First Exercise}
+
+\begin{exmp}
+\emph{Logarithmic Spiral:}
+\begin{equation*}
+\gamma = (e^{kt} cos(t), e^{kt} sin(t)) \text{ with } t \in (-\infty, \infty)
+\end{equation*}
+It is a fractal as in self similar.
+
+bla bla
+
+\begin{equation*}
+L(\gamma|_{(-\infty, 0]}) = \int_{-\infty}^0 ||\dot\gamma(t)|| dt = \int_{-\infty}^0 e^{kt} \sqrt{k^2+1} dt = \frac{\sqrt{k^2+1}}{k}
+\end{equation*}
+
+\end{exmp}
+
+\begin{exmp}
+Dynamic description: \emph{Cycloid}
+wheel.jpg
+
+\begin{equation*}
+\gamma_1 = (t, 1) \text{ is the trajectory of the center of the wheel.}
+\end{equation*}
+
+bla bla bla
+\end{exmp}
+
+\begin{thm}
+I will not \TeX~ the first exercise.
+\end{thm}
+
+
+\section{Copy-Paste-Quellen}
+
+
+%umgebungen
+
+\begin{thm}
+
+\end{thm}
+\emph{Proof:} trivial \hfill $\Box$
+
+\begin{lem}
+
+\end{lem}
+\emph{Proof:} trivial \hfill $\Box$
+
+
+\begin{exmp}
+
+\end{exmp}
+
+
+\begin{defn}
+
+\end{defn}
+
+
+%equations
+
+\begin{equation}
+x = y
+\end{equation}
+
+
+\begin{equation*}
+x = y
+\end{equation*}
+
+
+\begin{align}
+a &= b \\
+c &= d + e
+\end{align}
+
+
+\begin{align*}
+a &= b \\
+c &= d + e
+\end{align*}
+
+
+
+
+
+%\bibliography{lit}
+%\bibliographystyle{plain}
+\end{document}
+
