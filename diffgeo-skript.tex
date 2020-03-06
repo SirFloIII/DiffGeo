@@ -239,11 +239,11 @@ Since $\phi'(s_0) \neq 0$ because $\phi^{-1}$ is differentiable, one has $\dot\d
 Let $\gamma: [a,b] \to \mathbb R^n$ be a smooth curve. Its length is defined as:
 
 \begin{equation*}
-L(\gamma) = \int_a^b ||\gamma\dot(t)|| dt
+L(\gamma) = \int_a^b \left\|\gamma\dot(t)\right\| dt
 \end{equation*}
 \end{defn}
 
-Motivation: $\int_a^b ||\gamma\dot(t)|| dt $ is the supremum of lengths of inscribed polygons.
+Motivation: $\int_a^b \left\|\gamma\dot(t)\right\| dt $ is the supremum of lengths of inscribed polygons.
 
 \begin{figure}[H]
 \centering
@@ -257,10 +257,10 @@ Motivation: $\int_a^b ||\gamma\dot(t)|| dt $ is the supremum of lengths of inscr
 \begin{lem}
 The length of an curve is always longer than the line between the endpoints, i.e.:
 \begin{equation*}
-\int_{t_i}^{t_{i+1}} ||\dot\gamma(t)|| dt \geq ||\gamma(t_{i+1}) - \gamma(t_i)||
+\int_{t_i}^{t_{i+1}} \left\|\dot\gamma(t)\right\| dt \geq \left\|\gamma(t_{i+1}) - \gamma(t_i)\right\|
 \end{equation*}
 \end{lem}
-\emph{Proof:} $\int_{t_i}^{t_{i+1}} ||\dot\gamma(t)|| dt \geq ||\int_{t_i}^{t_{i+1}} \dot\gamma(t) dt|| =  ||\gamma(t_{i+1}) - \gamma(t_i)||$ \hfill $\Box$
+\emph{Proof:} $\int_{t_i}^{t_{i+1}} \left\|\dot\gamma(t)\right\| dt \geq \left\|\int_{t_i}^{t_{i+1}} \dot\gamma(t) dt\right\| =  \left\|\gamma(t_{i+1}) - \gamma(t_i)\right\|$ \hfill $\Box$
 
 \begin{col}
 $L(\gamma)$ is greater or equal to the length of any inscribed polygon.
@@ -268,7 +268,7 @@ $L(\gamma)$ is greater or equal to the length of any inscribed polygon.
 
 
 \begin{defn}
-A curve $\gamma$ is called a \emph{unit-speed curve} if $\forall t : ||\dot\gamma(t)|| = 1$. For unit-speed curves it holds that $L(\gamma) = b-a$. Unit-speed curves are also called \emph{arc-length parametrizations.}
+A curve $\gamma$ is called a \emph{unit-speed curve} if $\forall t : \left\|\dot\gamma(t)\right\| = 1$. For unit-speed curves it holds that $L(\gamma) = b-a$. Unit-speed curves are also called \emph{arc-length parametrizations.}
 \end{defn}
 
 
@@ -277,24 +277,24 @@ Every regular curve has a unit-speed reparametrization.
 \end{thm}
 \emph{Proof:} Let $\gamma: I \to \mathbb R^n$ be regular. Fix $a \in I$ and define
 \begin{equation*}
-\psi: I \to \mathbb R: t \mapsto \int_a^t ||\gamma\dot(s)|| ds.
+\psi: I \to \mathbb R: t \mapsto \int_a^t \left\|\gamma\dot(s)\right\| ds.
 \end{equation*}
 
 Claim: $\psi$ is the inverse of the $\phi$ that we are looking for.
-$\psi$ is continuously differentiable: $\psi'(t) = ||\dot\gamma(t)|| > 0$ and therefore $\psi$ is monotone and $\psi^{-1}$ is also differentiable.
+$\psi$ is continuously differentiable: $\psi'(t) = \left\|\dot\gamma(t)\right\| > 0$ and therefore $\psi$ is monotone and $\psi^{-1}$ is also differentiable.
 Let $J = \psi(I)$ and $\phi = \psi^{-1}$. One has
 \begin{equation*}
-\phi'(s) = \frac{1}{\psi'(\phi(s))} = \frac{1}{||\gamma\dot(\phi(s))||}.
+\phi'(s) = \frac{1}{\psi'(\phi(s))} = \frac{1}{\left\|\gamma\dot(\phi(s))\right\|}.
 \end{equation*}
 Therefore: 
 \begin{equation*}
-\dot\delta(s) = \dot\gamma(\phi(s)) \cdot \phi'(s) = \frac{\dot\gamma(\phi(s))}{||\dot\gamma(\phi(s))||}
+\dot\delta(s) = \dot\gamma(\phi(s)) \cdot \phi'(s) = \frac{\dot\gamma(\phi(s))}{\left\|\dot\gamma(\phi(s))\right\|}
 \end{equation*}
 which is a unit vector. \hfill $\Box$
 
 
 \begin{defn}
-If $||\dot\gamma(t)|| = 1$, then $t$ is called a \emph{natural parameter}.
+If $\left\|\dot\gamma(t)\right\| = 1$, then $t$ is called a \emph{natural parameter}.
 
 A natural parameter is unique up to starting point and the direction.
 \end{defn}
@@ -318,7 +318,7 @@ Then by the Implicit Function Theorem locally $\{(x,y)|F(x,y) = 0\}$ can be repr
 Consider the circle or generally closed curves. $\gamma = (cos(t), sin(t))$. But what should $I$ be? $[0, 2\pi)$ or $(-\infty, \infty)$
 \end{exmp}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width = 0.7\textwidth]{img/lemniscate}
 \caption{Lemniscate of Bernoulli}
@@ -365,7 +365,7 @@ But what about the point $(0,0)$? This brings us to the following definitions:
 \end{itemize}
 \end{defn}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width = 0.7\textwidth]{img/nongeneric}
 \caption{Non-generic Curves: multiple intersection on the left, self-tangency on the right}
@@ -376,7 +376,7 @@ But what about the point $(0,0)$? This brings us to the following definitions:
 \subsection{Curvature of Curves}
 
 \begin{defn}
-Let $\gamma$ be a unit-speed curve in $\mathbb R^n$. Its \emph{curvature} $\kappa(t)$ at the point $\gamma(t)$ is  defined to be $|| \ddot\gamma(t)||$. The curvature of an arbitrary regular curve is defined as the curvature of  its unit-speed reparametrization.
+Let $\gamma$ be a unit-speed curve in $\mathbb R^n$. Its \emph{curvature} $\kappa(t)$ at the point $\gamma(t)$ is  defined to be $\left\| \ddot\gamma(t)\right\|$. The curvature of an arbitrary regular curve is defined as the curvature of  its unit-speed reparametrization.
 \end{defn}
 
 \begin{lem}
@@ -398,116 +398,146 @@ The curvature of a circle of radius $R$ is $\frac{1}{R}$.
 \gamma(t) &= R \cdot \left(\cos\left(\frac{t}{R}\right), \sin\left(\frac{t}{R}\right)\right) \\
 \dot\gamma(t) &= \left(-\sin\left(\frac{t}{R}\right), \cos\left(\frac{t}{R}\right)\right) \\
 \ddot\gamma(t) &= -\frac{1}{R} \cdot \left(\cos\left(\frac{t}{R}\right), \sin\left(\frac{t}{R}\right)\right) \\
-&\text{thus: } ||\ddot\gamma(t)|| = \frac{1}{R} 
+&\text{thus: } \left\|\ddot\gamma(t)\right\| = \frac{1}{R} 
 \end{align*}
 \hfill $\Box$
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width = 0.7\textwidth]{img/schmiegekreis}
-\caption{Non-generic Curves: multiple intersection on the left, self-tangency on the right}
-\label{fig:non-generic}
+\caption{A circle touching a curve in a point whose radius is the inverse of the curvature is called \emph{osculating}. It ``snuggles up'' against the curve.}
+\label{fig:schmiegekreis}
 \end{figure}
 
 
-To compute the cuvature of a non-unit-speed curve, on may use:
+To compute the cuvature of a non-unit-speed curve, on may use the following Theorem.
 
 \begin{thm}
 The curvature of an arbitrary regular curve in $\mathbb R^2$ or $\mathbb R^3$ is:
 
 \begin{equation*}
-\kappa = \frac{||\dot\gamma \times \ddot\gamma||}{||\dot\gamma||^3}
+\kappa = \frac{\left\|\dy \times \ddy\right\|}{\left\|\dy\right\|^3}
 \end{equation*}
 
-For $a, b \in \mathbb R^2$: $||a \times b|| := |det(a~b)|$
+Note: For $a, b \in \mathbb R^2$: $a \times b := |\det(a~b)|$
 \end{thm}
 
-\emph{Proof:} Let $\delta = \gamma \circ \phi$ be a unit-speed reparametrization. By definition, $\kappa(t) = ||\ddot\delta(s)||$ where $t = \phi(s)$. 
+\emph{Proof:} Let $\delta = \gamma \circ \phi$ be a unit-speed reparametrization. By definition:
+\begin{equation*}
+\kappa(t) = \left\|\ddot\delta(s)\right\|\text{ where }t = \phi(s)
+\end{equation*}
+Then:
+\begin{align*}
+\dot\delta(s) &= \dot\gamma\left(\phi(s)\right) \cdot \phi'(s) \\
+			  &= \dot\gamma(t) \cdot \phi'(s) \\
+\ddot\delta(s) &= \frac{d}{ds} \left(\dot\gamma(t) \cdot \phi'(s)\right) \\
+			   &= \ddot\gamma(t) \cdot \left(\phi'(s)\right)^2 + \dot\gamma(t)\phi''(s)
+\end{align*}
 
-$\dot\delta(s) = \dot\gamma(\phi(s)) \cdot \phi'(s) = \dot\gamma(t) \cdot \phi'(s)$
+From this formula we need to eliminate $\phi', \phi''$.
 
-$\ddot\delta(s) = d/ds (\dot\gamma(t) \cdot \phi'(s)) = \ddot\gamma(t) (\phi'(s))^2 + \dot\gamma(t)\phi''(s)$
+\begin{equation*}
+\left\|\dot\delta(s)\right\| = 1 \Rightarrow \phi'(s) = \frac{1}{\left\|\dot\gamma(t)\right\|}
+\end{equation*}
 
-Need to eliminate $\phi', \phi''$. 
+Thus:
 
-$||\dot\delta(s)|| = 1 \Rightarrow \phi(s) = 1/||\dot\gamma(t)||$
+\begin{align*}
+\phi''(s) &= \frac{d}{ds} \frac{1}{\left\|\dot\gamma(t)\right\|} \\
+&= \frac{d}{ds} \frac{1}{\sqrt{\left\langle\dot\gamma(t), \dot\gamma(t)\right\rangle}} \\
+&= - \frac{1}{2} \frac{1}{\left\langle\dot\gamma(t), \dot\gamma(t)\right\rangle^{3/2}} \frac{d}{ds} \left\langle\dot\gamma(t), \dot\gamma(t)\right\rangle \\
+\Big(\text{Using the Leibniz-rule }&\text{for inner products: } \left\langle v,w\right\rangle' = \left\langle v',w\right\rangle + \left\langle v,w'\right\rangle \Big) \\
+&= - \frac{1}{2} \frac{1}{\left\|\dot\gamma(t)\right\|^3} \cdot 2 \left\langle\ddot\gamma(t) \phi'(s), \dot\gamma(t)\right\rangle \\
+&= - \frac{\left\langle\ddot\gamma(t), \dot\gamma(t)\right\rangle \phi'(s)}{\left\|\dot\gamma\right\|^3} \\
+&= - \frac{\left\langle\ddot\gamma(t), \dot\gamma(t)\right\rangle}{\left\|\dot\gamma\right\|^4} \\
+\text{Therefore: }\ddot\delta(s) &= \frac{\ddot\gamma}{\left\|\dot\gamma\right\|^2} - \frac{\left\langle\dot\gamma, \ddot\gamma\right\rangle \dot\gamma}{\left\|\dot\gamma\right\|^4} \\
+&= \ddot\gamma \left\langle\dot\gamma, \dot\gamma\right\rangle - \frac{\dot\gamma\left\langle\dot\gamma, \ddot\gamma\right\rangle}{\left\|\dot\gamma\right\|^4} \\
+\Big(\text{Using the BAC-}& \text{CAB rule } a \times (b\times c) = \left\langle a,c\right\rangle b - \left\langle a,b\right\rangle c \Big) \\
+&= \frac{\dot\gamma \times (\ddot\gamma \times \dot\gamma)}{\left\|\dot\gamma\right\|^4}
+\end{align*}
 
-$\delta''(s) = d/ds (1/||\dot\gamma(t)||) = d/ds ( 1/\sqrt{<\dot\gamma(t), \dot\gamma(t)>}) = -1/2 1/<\dot\gamma(t), \dot\gamma(t)>^{3/2} d/ds <\dot\gamma(t), \dot\gamma(t)> = -1/2 1/||\dot\gamma(t)||^3 2 <\ddot\gamma(t) \phi'(s), \dot\gamma(t)> = - <\ddot\gamma(t), \dot\gamma(t)> \phi'(s)/||\dot\gamma||^3 = - <\ddot\gamma(t), \dot\gamma(t)>/||\dot\gamma||^4$
+Since $\dot\gamma \perp (\ddot\gamma \times \dot\gamma)$, one has 
+\begin{equation*}
+\left\|\dot\gamma \times (\ddot\gamma \times \dot\gamma)\right\| = \left\|\dot\gamma\right\| \cdot \left\|\ddot\gamma \times \dot\gamma\right\|
+\end{equation*}
 
-$<v,w>' = <v',w> + <v,w'>$ Leibnitzrule for inner products
-
-$\ddot\delta{s} = \ddot\gamma/||\dot\gamma||^2 - <\dot\gamma, \ddot\gamma> \dot\gamma / ||\dot\gamma||^4 = \ddot\gamma <\dot\gamma, \dot\gamma> - \dot\gamma<\dot\gamma, \ddot\gamma> / ||\dot\gamma||^4$
-
-BAC-CAB rule: $a \times (b\times c) = <a,c>b-<a,b>c$
-
-$\Rightarrow \ddot\delta(s) = \dot\gamma \times (\ddot\gamma \times \dot\gamma) / ||\dot\gamma||^4$
-
-Since $\dot\gamma ortho (\ddot\gamma \times \dot\gamma)$, on has $||\dot\gamma \times (\ddot\gamma \times \dot\gamma) = ||\dot\gamma|| \cdot ||\ddot\gamma \times \dot\gamma||$.
-
-Thus: $\dot\delta(s) = \dot\gamma(\phi(s)) \cdot \phi'(s) = \dot\gamma(t) \cdot \phi'(s)$
-
- \hfill $\Box$
+and therefore 
+\begin{equation*}
+\left\|\ddot\delta(s)\right\| = \kappa(t) = \frac{\left\|\dy \times \ddy\right\|}{\left\|\dy\right\|^3}
+\end{equation*}
+\hfill $\Box$
 
 
 \subsection{Signed curvature and the turning number}
 
 \begin{lem}
-If $\gamma$ is a unitspeed curve, then $\ddot\gamma ortho \dot\gamma$.
+If $\gamma$ is a unit-speed curve, then $\ddot\gamma \perp \dot\gamma$.
 \end{lem}
 
-\emph{Proof:} $||\dot\gamma|| = 1 \Rightarrow <\dot\gamma, \dot\gamma> = 1 \Rightarrow d/dt <\dot\gamma, \dot\gamma> = 0 \Rightarrow 2 <\ddot\gamma, \dot\gamma> = 0 \Rightarrow \dot\gamma ortho \ddot\gamma$ \hfill $\Box$
+\emph{Proof:} $\left\|\dot\gamma\right\| = 1 \Rightarrow \left\langle\dot\gamma, \dot\gamma\right\rangle = 1 \Rightarrow \frac{d}{dt} \left\langle\dot\gamma, \dot\gamma\right\rangle = 0 \Rightarrow 2 \left\langle\ddot\gamma, \dot\gamma\right\rangle = 0 \Rightarrow \dot\gamma \perp \ddot\gamma$ \hfill $\Box$
 
-Let $\gamma$ be a unit-speed planar curve.
 
-skizze
-
-Denote by $\nu_s(t)$ (the signed normal) the unit vector orthogonal to $\dot\gamma(t)$ such that $(\dot\gamma, \nu_s)$ form a positivly oriented Orthonormal Basis.
+\begin{figure}[H]
+\centering
+\def\svgwidth{0.3\textwidth}
+\input{img/velocity-and-acceleration.pdf_tex}
+\caption{$\ddy$ is also called the \emph{acceleration}.}
+\label{fig:velocity-and-acceleration}
+\end{figure}
 
 
 \begin{defn}
-The number $\kappa_s(t)$ such that $\ddot\gamma(t) = \kappa_s(t) \nu_s(t)$ is called the \emph{signed curvature} of $\gamma$.
+Let $\gamma$ be a planar unit-speed curve. Denote by $\nu_s(t)$ (the signed normal) the unit vector orthogonal to $\dot\gamma(t)$ such that $(\dot\gamma, \nu_s)$ form a positively oriented ONB (orthonormal basis). The number $\kappa_s(t)$ such that $\ddot\gamma(t) = \kappa_s(t) \nu_s(t)$ is called the \emph{signed curvature} of $\gamma$.
 \end{defn}
 
-Clearly, $|\kappa_s(t)| = \kappa(t)$.
-
-$\kappa_s < 0$ right turn
-$\kappa_s > 0$ left turn
-
+\begin{obsv}
+Clearly, $|\kappa_s(t)| = \kappa(t)$. The sign of $\kappa_s(t)$ indicates the direction of the turn:
+\begin{align*}
+\kappa_s &< 0\text{: right turn} \\
+\kappa_s &> 0\text{: left turn} \\
+\kappa_s &= 0\text{: straight}
+\end{align*}
 An orientation change for $\gamma$ implies a sign change for $\kappa_s(t)$.
+\end{obsv}
 
 \begin{defn}
-A closed regular curve $\gamma$ is $\gamma : [a,b] \to \mathbb R^n$ such that $\gamma(a) = \gamma(b)$ and $\gamma^{(n)}(a) = \gamma^{(n)}(b)$.
+A curve $\gamma : [a,b] \to \mathbb R^n$ is called a \emph{closed regular} curve if the endpoints meet and all derivatives match, i.e.: $\gamma(a) = \gamma(b)$ and $\gamma^{(n)}(a) = \gamma^{(n)}(b)$.
 \end{defn}
 
 \begin{thm}
-The total sighend curvature of a closed regular curve is an integer multiple of $2\pi$:
-
-$\int_a^b \kappa_s(t) dt = 2k\pi.$
+The total signed curvature of a closed regular curve is an integer multiple of $2\pi$:
+\begin{equation*}
+\int_a^b \kappa_s(t) dt = 2k\pi
+\end{equation*}
 \end{thm}
 
-proof next time
+\emph{Proof:} next time \hfill $\Box$
 
 \begin{defn}
-The number k is called the turning number of $\gamma$. This is the number of times the tangent vector rotates when running along the curve.
+This number $k$ is called the \emph{turning number} of $\gamma$. It is the number of times the tangent vector rotates when running along the curve.
 \end{defn}
 
-\begin{exmp}
-Circle:
-k = 1
-Infinity Sign:
-k = 0
-Double Circle:
-k = 2
-skizzen
-\end{exmp}
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.7\textwidth]{img/turning-number-examples}
+\caption{Different turning numbers: Circle: $k=1$, Lemniscate: $k=0$, Loop-de-Loop: $k=2$}
+\label{fig:turning-number-examples}
+\end{figure}
 
 \begin{thm}
-(Whithney) The closed planar curves are regularly isotropic if and only if the have the same turning number.
+(Whitney) The closed planar curves are regularly isotropic if and only if the have the same turning number.
 
-isotropic means there is a continous deformation of one curve into the other. regular isotropic means all intermediate curves are regular.
+Two curves are \emph{isotropic} if there is a continuous deformation of one curve into the other. Two regular curves are \emph{regularly isotropic} if all intermediate curves are regular as well.
 \end{thm}
 
-skizze infty to circle counterexample.
+\emph{Proof:} next time \hfill $\Box$
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = 0.7\textwidth]{img/lemniscate-to-circle}
+\caption{The lemniscate and the circle are isotropic but not regularly isotropic. Note the  \emph{cusp} in the fourth step.}
+\label{fig:lemniscate-to-circle}
+\end{figure}
 
 
 
@@ -532,7 +562,7 @@ It is a fractal as in self similar.
 bla bla
 
 \begin{equation*}
-L(\gamma|_{(-\infty, 0]}) = \int_{-\infty}^0 ||\dot\gamma(t)|| dt = \int_{-\infty}^0 e^{kt} \sqrt{k^2+1} dt = \frac{\sqrt{k^2+1}}{k}
+L(\gamma|_{(-\infty, 0]}) = \int_{-\infty}^0 \left\|\dot\gamma(t)\right\| dt = \int_{-\infty}^0 e^{kt} \sqrt{k^2+1} dt = \frac{\sqrt{k^2+1}}{k}
 \end{equation*}
 
 \end{exmp}
