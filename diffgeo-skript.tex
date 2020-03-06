@@ -315,7 +315,7 @@ Then by the Implicit Function Theorem locally $\{(x,y)|F(x,y) = 0\}$ can be repr
 
 
 \begin{exmp}
-Consider the circle or generally closed curves. $\gamma = (cos(t), sin(t))$. But what should $I$ be? $[0, 2\pi)$ or $(-\infty, \infty)$
+Consider the circle $\gamma = (cos(t), sin(t))$ or generally closed curves. But what should $I$ be? $[0, 2\pi)$ or $(-\infty, \infty)$
 \end{exmp}
 
 \begin{figure}[H]
@@ -359,7 +359,7 @@ But what about the point $(0,0)$? This brings us to the following definitions:
 \begin{itemize}
 \item The image of a smooth map $I \to \mathbb R^2$ with non-vanishing derivative is called \emph{immersed curve}.
 
-\item A Subset of $\mathbb R^2$ which in the neighborhood of every point can be represented as $\{(x,y) ~|~ F(x,y) = 0\}$ with $\nabla F \neq 0$ is called an \emph{embedded curve}.
+\item A subset of $\mathbb R^2$ which in the neighborhood of every point can be represented as $\{(x,y) ~|~ F(x,y) = 0\}$ with $\nabla F \neq 0$ is called an \emph{embedded curve}.
 
 \item A \emph{generic} immersed curve has no multiple intersections and no self-tangencies. A non-generic curve can be made generic by a small perturbation.
 \end{itemize}
@@ -410,7 +410,7 @@ The curvature of a circle of radius $R$ is $\frac{1}{R}$.
 \end{figure}
 
 
-To compute the cuvature of a non-unit-speed curve, on may use the following Theorem.
+To compute the curvature of a non-unit-speed curve, on may use the following Theorem.
 
 \begin{thm}
 The curvature of an arbitrary regular curve in $\mathbb R^2$ or $\mathbb R^3$ is:
@@ -419,7 +419,7 @@ The curvature of an arbitrary regular curve in $\mathbb R^2$ or $\mathbb R^3$ is
 \kappa = \frac{\left\|\dy \times \ddy\right\|}{\left\|\dy\right\|^3}
 \end{equation*}
 
-Note: For $a, b \in \mathbb R^2$: $a \times b := |\det(a~b)|$
+Note: For $a, b \in \mathbb R^2$: $\|a \times b\| := |\det(a~b)|$
 \end{thm}
 
 \emph{Proof:} Let $\delta = \gamma \circ \phi$ be a unit-speed reparametrization. By definition:
@@ -451,7 +451,7 @@ Thus:
 &= - \frac{\left\langle\ddot\gamma(t), \dot\gamma(t)\right\rangle \phi'(s)}{\left\|\dot\gamma\right\|^3} \\
 &= - \frac{\left\langle\ddot\gamma(t), \dot\gamma(t)\right\rangle}{\left\|\dot\gamma\right\|^4} \\
 \text{Therefore: }\ddot\delta(s) &= \frac{\ddot\gamma}{\left\|\dot\gamma\right\|^2} - \frac{\left\langle\dot\gamma, \ddot\gamma\right\rangle \dot\gamma}{\left\|\dot\gamma\right\|^4} \\
-&= \ddot\gamma \left\langle\dot\gamma, \dot\gamma\right\rangle - \frac{\dot\gamma\left\langle\dot\gamma, \ddot\gamma\right\rangle}{\left\|\dot\gamma\right\|^4} \\
+&= \frac{\ddot\gamma \left\langle\dot\gamma, \dot\gamma\right\rangle - \dot\gamma\left\langle\dot\gamma, \ddot\gamma\right\rangle}{\left\|\dot\gamma\right\|^4} \\
 \Big(\text{Using the BAC-}& \text{CAB rule } a \times (b\times c) = \left\langle a,c\right\rangle b - \left\langle a,b\right\rangle c \Big) \\
 &= \frac{\dot\gamma \times (\ddot\gamma \times \dot\gamma)}{\left\|\dot\gamma\right\|^4}
 \end{align*}
@@ -487,7 +487,7 @@ If $\gamma$ is a unit-speed curve, then $\ddot\gamma \perp \dot\gamma$.
 
 
 \begin{defn}
-Let $\gamma$ be a planar unit-speed curve. Denote by $\nu_s(t)$ (the signed normal) the unit vector orthogonal to $\dot\gamma(t)$ such that $(\dot\gamma, \nu_s)$ form a positively oriented ONB (orthonormal basis). The number $\kappa_s(t)$ such that $\ddot\gamma(t) = \kappa_s(t) \nu_s(t)$ is called the \emph{signed curvature} of $\gamma$.
+Let $\gamma$ be a planar unit-speed curve. Denote by $\nu_s(t)$ (the \emph{signed normal}) the unit vector orthogonal to $\dot\gamma(t)$ such that $(\dot\gamma, \nu_s)$ form a positively oriented ONB (orthonormal basis). The number $\kappa_s(t)$ such that $\ddot\gamma(t) = \kappa_s(t) \nu_s(t)$ is called the \emph{signed curvature} of $\gamma$.
 \end{defn}
 
 \begin{obsv}
