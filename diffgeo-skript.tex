@@ -239,7 +239,7 @@ Since $\phi'(s_0) \neq 0$ because $\phi^{-1}$ is differentiable, one has $\dot\d
 Let $\gamma: [a,b] \to \mathbb R^n$ be a smooth curve. Its length is defined as:
 
 \begin{equation*}
-L(\gamma) = \int_a^b \left\|\gamma\dot(t)\right\| dt
+\mathcal L(\gamma) = \int_a^b \left\|\gamma\dot(t)\right\| dt
 \end{equation*}
 \end{defn}
 
@@ -263,7 +263,7 @@ The length of an curve is always longer than the line between the endpoints, i.e
 \emph{Proof:} $\int_{t_i}^{t_{i+1}} \left\|\dot\gamma(t)\right\| dt \geq \left\|\int_{t_i}^{t_{i+1}} \dot\gamma(t) dt\right\| =  \left\|\gamma(t_{i+1}) - \gamma(t_i)\right\|$ \hfill $\Box$
 
 \begin{col}
-$L(\gamma)$ is greater or equal to the length of any inscribed polygon.
+$\mathcal L(\gamma)$ is greater or equal to the length of any inscribed polygon.
 \end{col}
 
 
@@ -413,6 +413,7 @@ The curvature of a circle of radius $R$ is $\frac{1}{R}$.
 To compute the curvature of a non-unit-speed curve, on may use the following Theorem.
 
 \begin{thm}
+\label{thm:curvature_arbitrary_curve}
 The curvature of an arbitrary regular curve in $\mathbb R^2$ or $\mathbb R^3$ is:
 
 \begin{equation*}
@@ -550,38 +551,94 @@ Two curves are \emph{isotropic} if there is a continuous deformation of one curv
 
 \section{Exercises}
 
-\subsection{First Exercise}
+\subsection{Exercise 1}
 
-\begin{exmp}
-\emph{Logarithmic Spiral:}
-\begin{equation*}
-\gamma = (e^{kt} cos(t), e^{kt} sin(t)) \text{ with } t \in (-\infty, \infty)
-\end{equation*}
-It is a fractal as in self similar.
+\begin{enumerate}
 
-bla bla
+\item
+\begin{enumerate}
+\item \emph{Show that every tangent to the parabola $y=x^2$ is perpendicular to the line through the focus $F := (0, \frac{1}{4})$ and the intersection point of the tangent with the $x$-axis.}
 
-\begin{equation*}
-L(\gamma|_{(-\infty, 0]}) = \int_{-\infty}^0 \left\|\dot\gamma(t)\right\| dt = \int_{-\infty}^0 e^{kt} \sqrt{k^2+1} dt = \frac{\sqrt{k^2+1}}{k}
-\end{equation*}
-
-\end{exmp}
-
-\begin{exmp}
-Dynamic description: \emph{Cycloid}
-wheel.jpg
+Let $K := (k, 0)$ be the intersection point of the tangent with the $x$-Axis and let $P := (p, p^2)$ be the point where the  tangent touches the parabola. Let us find a connection between $k$ and $p$. The slope of the tangent on the one hand is known by the derivative of the parabola at $p$ and on the other hand is known by the slope triangle formed by $K$, $P$ and $(p,0)$. Thus it must hold that:
 
 \begin{equation*}
-\gamma_1 = (t, 1) \text{ is the trajectory of the center of the wheel.}
+2p = \frac{p^2}{p-k}
 \end{equation*}
 
-bla bla bla
-\end{exmp}
+Rearranging this equation gives us our desired connection:
 
-\begin{thm}
-I will not \TeX~ the first exercise.
-\end{thm}
+\begin{equation*}
+p = 2k
+\end{equation*}
 
+Now, with this knowledge we can take the dot-product of $\vec{KP} = (p-k, p^2) = (k, 4k^2)$ and $\vec{KF} = (-k, \frac{1}{4})$.
+
+\begin{equation*}
+\left\langle\vec{KP}, \vec{KF}\right\rangle = -k^2 + \frac{4}{4}k^2 = 0
+\end{equation*}
+
+Thus, the tangent and the focal line are indeed perpendicular. \hfill $\Box$
+
+\item \emph{Show that if two tangents meet on the directrix $y = -\frac{1}{4}$, then they are perpendicular.}
+
+no truly elegant proof yet, maybe later.
+
+\end{enumerate}
+
+\item \emph{Compute the length of one arc of the cycloid.}
+
+This is a simple integral using a rather rare trig identity, which however can be easily derived from the more common one: $\sin(t)^2 = \frac{1}{2} - \frac{1}{2}\cos(2t)$.
+\begin{align*}
+\mathcal L(\gamma) &= \int_0^{2\pi} \left\| \dot\gamma \right\| dt \\
+&= \int_0^{2\pi} \sqrt{(1-\cos(t))^2 + \sin(t)^2} dt \\
+&= \int_0^{2\pi} \sqrt{1 - 2\cos(t) + \cos(t)^2 + \sin(t)^2} dt \\
+&= \int_0^{2\pi} \sqrt{2 - 2\cos(t)} dt \\
+&= \int_0^{2\pi} 2 \sin\left(\frac{t}{2}\right) dt \\
+&= 2 \cdot 2 \cos\left(\frac{t}{2}\right)\Bigg|_0^{2\pi} = 8
+\end{align*}
+\hfill $\Box$
+
+\item \emph{Compute the curvature of the cycloid at each point. How does the curvature behave near the singular points?}
+
+This is best done by referencing Theorem \ref{thm:curvature_arbitrary_curve}.
+
+\begin{align*}
+\kappa(t) &= \frac{\left\|\dy \times \ddy\right\|}{\left\|\dy\right\|^3} \\
+&= \frac{|\cos(t) - \cos(t)^2 - \sin(t)^2|}{(2 - 2\cos(t))^{\frac{3}{2}}} \\
+&= \frac{1}{2^{\frac{3}{2}}} \frac{1 - \cos(t)}{(1 - \cos(t))^{\frac{3}{2}}} \\
+&= \frac{1}{2^{\frac{3}{2}}} \frac{1}{\sqrt{1 - \cos(t)}}
+\end{align*}
+
+Note that as $t$ approaches a multiple of $2\pi$, where the singular points are located, the denominator tends to $0$ and thus the curvature approaches $\infty$.
+
+
+
+\item \emph{Show that the perimeter of the ellipse with half-axes $a>b$ is equal to }
+
+\begin{equation*}
+4a \int_0^\frac{\pi}{2} \sqrt{1 - k^2 \sin^2t} ~dt = 4a \int_0^1 \frac{\sqrt{1 - k^2 x^2}}{\sqrt{1 - x^2}} ~dx
+\end{equation*}
+
+\emph{where $k = \sqrt{1 - \frac{b^2}{a^2}}$ is the eccentricity of the ellipse. (This integral is called the complete elliptic integral of the second kind.)}
+
+We will consider only the upper right quarter of the ellipse, but count it 4 times because of symmetry. Consider the parametrization $\gamma(t) = (a \sin(t), b \cos(t))$ for $t \in (0, \frac{\pi}{2})$.
+
+\begin{align*}
+4 \mathcal L(\gamma) &= 4 \int_0^\frac{\pi}{2} \sqrt{a^2 \cos^2t + b^2\sin^2t} ~dt \\
+&= 4a \int_0^\frac{\pi}{2} \sqrt{\cos^2t + \frac{b^2}{a^2}\sin^2t} ~dt \\
+&= 4a \int_0^\frac{\pi}{2} \sqrt{1 - \left(1 - \frac{b^2}{a^2}\right)\sin^2t} ~dt \\
+&= 4a \int_0^\frac{\pi}{2} \sqrt{1 - k^2 \sin^2t} ~dt 
+\end{align*}
+
+Using the substitution $x = sin(t)$ with $dt = \frac{1}{\sqrt{1-x^2}} ~dx$ we get our result. Note that the fact that the parameter space is only $(0, \frac{\pi}{2})$ is important now, as $\sin(t)$ has to be monotonic in the interval for the substitution to be legal. 
+
+\begin{align*}
+4 \mathcal L(\gamma) &= 4a \int_0^1 \frac{\sqrt{1 - k^2 x^2}}{\sqrt{1 - x^2}} ~dx
+\end{align*}
+
+\hfill $\Box$
+
+\end{enumerate}
 
 \section{Copy-Paste-Quellen}
 
