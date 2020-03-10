@@ -31,6 +31,7 @@
 \newtheorem{thm}{Theorem}[section] % reset theorem numbering for each chapter
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{col}[thm]{Corollary}
+\newtheorem{defn-lem}[thm]{Definition-Lemma}
 
 \theoremstyle{definition}
 \newtheorem{defn}[thm]{Definition} % definition numbers are dependent on theorem numbers
@@ -512,7 +513,29 @@ The total signed curvature of a closed regular curve is an integer multiple of $
 \end{equation*}
 \end{thm}
 
-\emph{Proof:} next time \hfill $\Box$
+For the proof we need an additional Lemma.
+
+\begin{defn}
+Let $\dy(t) = (\cos\alpha(t), \sin\alpha(t))$. $\alpha(t)$ is definend up to a summand $2n\pi$. There is a global choice $\alpha: I \mapsto \mathbb R$ such that $\alpha$ is smooth. This function is called the \emph{turning angle}.
+\end{defn}
+
+\begin{lem}
+$\kappa_s(t) = \dot\alpha(t)$
+\end{lem}
+
+\emph{Proof:} $\dy = (\cos \alpha, \sin \alpha)$
+
+$\ddy = (-\sin\alpha, \cos\alpha) \cdot \dot\alpha$
+
+$\nu_s = (-\sin \alpha, \cos \alpha)$
+
+therefore $\kappa_s = \dot\alpha$
+
+\emph{Proof of Theorem:}
+
+$\int_a^b \kappa_s(t) dt = \int_a^b \dot\alpha dt = \alpha(b) - \alpha(a) = 2k\pi$
+
+\hfill $\Box$
 
 \begin{defn}
 This number $k$ is called the \emph{turning number} of $\gamma$. It is the number of times the tangent vector rotates when running along the curve.
@@ -541,9 +564,184 @@ Two curves are \emph{isotropic} if there is a continuous deformation of one curv
 \end{figure}
 
 
+\begin{thm}
+Let $f: I \to \mathbb R$ be any smooth function. Then there is a unit-speed curve $\gamma: I \to \mathbb R^2$ whose singed curvature is f. Besides, $\gamma$ is unique up to a rigid motion: if $\tilde\gamma : I \to \mathbb R^2$ is another unit-speed curve with the signed curvature f, then $\tilde\gamma = M \circ \gamma$ where $M: \mathbb R^2 \to \mathbb R^2$ is a distance and orientation-preserving bijection.
+\end{thm}
+
+\emph{Proof:} $\y(t) = y(t_0) + \int_{t_0}^t \dy(t) dt$
+$\dy(t) = (\cos\alpha(t), \sin\alpha(t))$
+$\dot\alpha(t) = f(t)$
+
+$\y$ has $\kappa_s = f$ if and only if the above equations are satisfied. General solution of the last one:
+
+$\alpha(t) = \alpha(t_0) + \int_{t0}^t f(t) dt$
+
+Then substitue into the second equation, then into the first. Parameters $\alpha(t_0)$ corresponds to rotation and $\y(t_0)$ corresponds to translation, the two free parameters in rigid motion. \hfill $\Box$
+
+\subsection{Space curves: curvature and torsion}
+
+\begin{defn}
+Let $\gamma$ be a unit speed curve in $\mathbb R^3$. Denote $\dy(t) =: T(t)$ AS we know, $\left\|\dy\right\| = 1 \Rightarrow \ddy \perp \dy$
+
+Denote $N(t) := \frac{\ddy}{||\ddy||}$ (assuming: $\ddy(t) \neq 0 ~\forall t$)
+
+$N(t)$ is called the \emph{principal normal} of $\gamma$.
+\end{defn}
+
+\begin{defn}
+The plane through $\gamma(t)$ spanned by $T(t)$ and $N(t)$ is called the \emph{osculating plane}. It has contact of order 2 with $\gamma$, i.e.:
+
+$\gamma(t) = \gamma(t_0) + \dy(t_0)(t-t_0) + \ddy/2(t-t_0)^2 + o((t-t_0)^3)$
+
+The sum of the first 3 terms lies in the osculation plane.
+\end{defn}
+
+\begin{defn}
+\emph{Torsion} is the turning speed of the osculation plane. (Compare: curvature is the turning speed of the tangent.)
+\end{defn}
+
+\begin{defn}
+B(t) is the unit vector such that $(T(t), N(t), B(t))$ is a positive ONB. It is called the \emph{binormal} to $\gamma$. The family of bases $(T(t), N(t), B(t))$ is called the \emph{Frenet-Serret frame}. Note that $B(t) = T(t) \times N(t).$
+\end{defn}
+
+skizze: FS frame in spiral curve.
+
+\begin{defn-lem}
+The derivative of the binormal is collinear with the normal:
+
+$\dot B(t) = -\tau(t) \cdot N(t)$
+
+The number $\tau(t)$ is called the \emph{torsion} of $\gamma$ at $\gamma(t)$
+
+$\tau(t) > 0 \Leftrightarrow$ ``right screw''
+\end{defn-lem}
+
+\emph{Proof:} $\left\|B(t)\right\| = 1 \Rightarrow \left\langle\dot B(t), B(t)\right\rangle = 0$. It remains to show $\left\langle\dot B(t), T(t)\right\rangle = 0$.
+
+$B = T \times N$
+$\dot B = \dot T \times N + T\times \dot N = \kappa N\times N + T\times \dot N = T\times \dot N \perp T$
+
+\hfill $\Box$
+
+\begin{thm}
+Frenet-Serret formulas:
+\begin{align*}
+\dot T &= \kappa N \\
+\dot N &= -\kappa T + \tau B \\
+\dot B &= -\tau N
+\end{align*}
+\end{thm}
+
+\emph{Proof:} The first and the third one hold by definition. The second one:
+
+$\left\langle\dot N, T\right\rangle = -\kappa, \left\langle\dot N, N\right\rangle = 0, \left\langle\dot N, B\right\rangle = \tau$
+
+$\left\langle N, T\right\rangle = 0$ differentiate this:
+
+$<\Dot N, T> + <N, \dot T>$
+
+bla
 
 
+\begin{lem}
+For any regular curve $\y$ in $\mathbb R^3$:
+\begin{equation*}
+\tau = \frac{det(\dy, \ddy, \dddot\gamma)}{\left\| \dy \times \ddy\right\|^2}
+\end{equation*}
 
+In the special case of a unit-speed curve:
+\begin{equation*}
+\tau = \frac{det(\dy, \ddy, \dddot\gamma)}{\kappa^2}
+\end{equation*}
+
+\end{lem}
+
+\emph{Proof:}
+
+Matrix form:
+
+\begin{verbatim}
+verbatim just so it compiles right now. todo: stupid matrices
+\dot T    (      0 \kappa    0 )   T
+\dot N  = (-\kappa      0 \tau ) * N
+\dot B    (      0  -\tau    0 )   B
+\end{verbatim}
+
+\begin{thm}
+Let $(e_1(t), \hdots, e_n(t))$ be a smooth family of ONB in $\mathbb R^n$. Let
+
+$\dot E = Q(t) E$
+
+Then $Q^T(t) = -Q(t)$, i.e.: Q is skew-symmetric.
+
+\end{thm}
+
+\begin{lem}
+If $M(t) \in SO(n)$ be a smooth family of orthogonal matrices such that $M(t_0) = I$. Then $\dot M(t_0)$ is skew-symmetric.
+\end{lem}
+
+\emph{Proof:} $M^TM = I$, differentiate:
+
+$\dot M^T(t) M(t) + M^T(t) \dot M(t) = 0$
+
+With $t = t_0$: $M(t_0) = I \Rightarrow \dot M(t_0) + \dot M(t_0) = 0$ \hfill $\Box$
+
+\emph{Proof of Theorem:} 
+
+Notation $\mathcal E(t) = e...e$
+
+Let $\mathcal E(t) = M(t)\cdot\mathcal E(t_0)$, $M(t) \in \mathbb R^{n\times n}$
+
+Besides, $M(t) \in SO(n), M(t_0) = I$
+
+Using the Lemma we get $\dot M(t_0)$ is skew-symmetric.
+
+$\mathcal E(t_0) = Q(t_0) \cdot \mathcal E(t_0)$
+
+bla bla \hfill $\Box$
+
+
+\begin{thm}
+Let $f: I\to \mathbb R, g: I \to \mathbb R$ be smooth functions with $f(t) > 0 ~\forall t.$ Then there is a unique up to a rigid motion unit-speed curve $\gamma: I \to \mathbb R^3$ with curvature f and torsion g.
+\end{thm}
+
+\emph{Sketch of Proof:} It is basically solving a vector-valued ODE:
+\begin{equation*}
+bla, nachher
+\end{equation*}
+
+It has a unique solution for any initial data $(T(t_0), N(t_0), B(t_0))$. Put $\gamma(t) = \dy(t_0) + \int_{t_0}^t T(t) dt$. Then $(T, N, B)$ is the Frenet-Surret frame for $\gamma$. B is the binormal, because the solution of the above ODE is an ONB.
+
+\hfill $\Box$
+
+\begin{thm}
+(Fenchel:) The total curvature of a closed space curve is:
+\begin{equation*}
+\int_a^b \kappa(t) dt \leq 2\pi
+\end{equation*}
+
+It is equal to $2\pi$ if and only if the curve is planar and convex.
+
+\end{thm}
+
+\begin{lem}
+\begin{equation*}
+\int_a^b \kappa(t) dt = L(T)
+\end{equation*}
+where $T:[a,b] \to \mathcal S^2 \subset \mathbb R^3$ is the \emph{tangent indicatrix}.
+\end{lem}
+
+\begin{lem}
+$T$ is contained in a great circle if and only if $\gamma$ is planar.
+\end{lem}
+
+\begin{lem}
+$T$ intersects every great circle at least once.
+\end{lem}
+
+\begin{thm}
+(Crofton:) Length of a spherical curve is half of the integral of the number of its intersections with great circles.
+\end{thm}
 
 
 
@@ -571,10 +769,10 @@ Rearranging this equation gives us our desired connection:
 p = 2k
 \end{equation*}
 
-Now, with this knowledge we can take the dot-product of $\vec{KP} = (p-k, p^2) = (k, 4k^2)$ and $\vec{KF} = (-k, \frac{1}{4})$.
+Now, with this knowledge we can take the dot-product of $\overrightarrow{KP} = (p-k, p^2) = (k, 4k^2)$ and $\overrightarrow{KF} = (-k, \frac{1}{4})$.
 
 \begin{equation*}
-\left\langle\vec{KP}, \vec{KF}\right\rangle = -k^2 + \frac{4}{4}k^2 = 0
+\overrightarrow{KP} \cdot \overrightarrow{KF} = -k^2 + \frac{4}{4}k^2 = 0
 \end{equation*}
 
 Thus, the tangent and the focal line are indeed perpendicular. \hfill $\Box$
