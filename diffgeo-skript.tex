@@ -581,8 +581,27 @@ Thus, the tangent and the focal line are indeed perpendicular. \hfill $\Box$
 
 \item \emph{Show that if two tangents meet on the directrix $y = -\frac{1}{4}$, then they are perpendicular.}
 
-no truly elegant proof yet, maybe later.
+Let $a$ and $b$ be tangent points of the parabola. We then have the following tangent equations:
+\begin{align*}
+	t_a(x)&=2a\cdot (x-a)+a^2\\
+	t_b(x)&=2b\cdot (x-b)+b^2
+\end{align*}
+For the scalar product of the tangent vectors we have
+\begin{equation*}
+\begin{pmatrix}
+1 \\ 2a\end{pmatrix} \cdot \begin{pmatrix} 1 \\ 2b\end{pmatrix}=4ab-1
+\end{equation*}
+We thus have to show that $4ab-1=0$.
 
+Since both tangents should meet on the directrix we have
+\begin{align*}
+	2a(x-a)+a^2&=-\frac{1}{4} \Leftrightarrow x=-\frac{1}{8a}+\frac{a}{2} \\
+	2b(x-b)+b^2&=-\frac{1}{4} \Leftrightarrow x=-\frac{1}{8b}+\frac{b}{2}\\
+\end{align*}
+as well as
+\begin{equation*}
+	-\frac{1}{8a}+\frac{a}{2} = -\frac{1}{8b}+\frac{b}{2} \Leftrightarrow 4ab-1=0
+\end{equation*}
 \end{enumerate}
 
 \item \emph{Compute the length of one arc of the cycloid.}
