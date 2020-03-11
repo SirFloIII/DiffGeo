@@ -226,11 +226,11 @@ is called a \emph{reparametrization} of $\gamma$.
 Regularity is preserved under reparametrization. A point $s_0 \in J$ is a regular point of $\delta$ if and only if $\gamma(s_0)$ is a regular point of $\gamma$.
 \end{lem}
 
-\emph{Proof:} By chain rule: 
+\begin{proof} By chain rule: 
 \begin{equation*}
 \dot\delta(s_0) = \dot\gamma(\phi(s_0)) \cdot \phi'(s_0)
 \end{equation*}
-Since $\phi'(s_0) \neq 0$ because $\phi^{-1}$ is differentiable, one has $\dot\delta(s_0) \neq 0 \Leftrightarrow \dot\gamma(\phi(s_0)) \neq 0$. \hfill $\Box$
+Since $\phi'(s_0) \neq 0$ because $\phi^{-1}$ is differentiable, one has $\dot\delta(s_0) \neq 0 \Leftrightarrow \dot\gamma(\phi(s_0)) \neq 0$. \end{proof}
 
 
 
@@ -261,7 +261,7 @@ The length of an curve is always longer than the line between the endpoints, i.e
 \int_{t_i}^{t_{i+1}} \left\|\dot\gamma(t)\right\| dt \geq \left\|\gamma(t_{i+1}) - \gamma(t_i)\right\|
 \end{equation*}
 \end{lem}
-\emph{Proof:} $\int_{t_i}^{t_{i+1}} \left\|\dot\gamma(t)\right\| dt \geq \left\|\int_{t_i}^{t_{i+1}} \dot\gamma(t) dt\right\| =  \left\|\gamma(t_{i+1}) - \gamma(t_i)\right\|$ \hfill $\Box$
+\begin{proof} $\int_{t_i}^{t_{i+1}} \left\|\dot\gamma(t)\right\| dt \geq \left\|\int_{t_i}^{t_{i+1}} \dot\gamma(t) dt\right\| =  \left\|\gamma(t_{i+1}) - \gamma(t_i)\right\|$ \end{proof}
 
 \begin{col}
 $\mathcal L(\gamma)$ is greater or equal to the length of any inscribed polygon.
@@ -276,7 +276,7 @@ A curve $\gamma$ is called a \emph{unit-speed curve} if $\forall t : \left\|\dot
 \begin{thm}
 Every regular curve has a unit-speed reparametrization.
 \end{thm}
-\emph{Proof:} Let $\gamma: I \to \mathbb R^n$ be regular. Fix $a \in I$ and define
+\begin{proof} Let $\gamma: I \to \mathbb R^n$ be regular. Fix $a \in I$ and define
 \begin{equation*}
 \psi: I \to \mathbb R: t \mapsto \int_a^t \left\|\gamma\dot(s)\right\| ds.
 \end{equation*}
@@ -291,7 +291,7 @@ Therefore:
 \begin{equation*}
 \dot\delta(s) = \dot\gamma(\phi(s)) \cdot \phi'(s) = \frac{\dot\gamma(\phi(s))}{\left\|\dot\gamma(\phi(s))\right\|}
 \end{equation*}
-which is a unit vector. \hfill $\Box$
+which is a unit vector. \end{proof}
 
 
 \begin{defn}
@@ -383,17 +383,17 @@ Let $\gamma$ be a unit-speed curve in $\mathbb R^n$. Its \emph{curvature} $\kapp
 \begin{lem}
 A curve has zero curvature everywhere if and only if it is a straight line segment.
 \end{lem}
-\emph{Proof:} Take the unit-speed reparametrization $\gamma$. Then 
+\begin{proof} Take the unit-speed reparametrization $\gamma$. Then 
 \begin{equation*}
 \ddot\gamma(t) = 0 \Leftrightarrow \dot\gamma(t) = \text{const.} \Leftrightarrow \gamma(t) = a\cdot t+b
 \end{equation*}
-\hfill $\Box$
+\end{proof}
 
 \begin{lem}
 The curvature of a circle of radius $R$ is $\frac{1}{R}$.
 \end{lem}
 
-\emph{Proof:} A unit-speed parametrization of the circle is:
+\begin{proof} A unit-speed parametrization of the circle is:
 
 \begin{align*}
 \gamma(t) &= R \cdot \left(\cos\left(\frac{t}{R}\right), \sin\left(\frac{t}{R}\right)\right) \\
@@ -401,7 +401,7 @@ The curvature of a circle of radius $R$ is $\frac{1}{R}$.
 \ddot\gamma(t) &= -\frac{1}{R} \cdot \left(\cos\left(\frac{t}{R}\right), \sin\left(\frac{t}{R}\right)\right) \\
 &\text{thus: } \left\|\ddot\gamma(t)\right\| = \frac{1}{R} 
 \end{align*}
-\hfill $\Box$
+\end{proof}
 
 \begin{figure}[H]
 \centering
@@ -424,7 +424,7 @@ The curvature of an arbitrary regular curve in $\mathbb R^2$ or $\mathbb R^3$ is
 Note: For $a, b \in \mathbb R^2$: $\|a \times b\| := |\det(a~b)|$
 \end{thm}
 
-\emph{Proof:} Let $\delta = \gamma \circ \phi$ be a unit-speed reparametrization. By definition:
+\begin{proof} Let $\delta = \gamma \circ \phi$ be a unit-speed reparametrization. By definition:
 \begin{equation*}
 \kappa(t) = \left\|\ddot\delta(s)\right\|\text{ where }t = \phi(s)
 \end{equation*}
@@ -467,7 +467,7 @@ and therefore
 \begin{equation*}
 \left\|\ddot\delta(s)\right\| = \kappa(t) = \frac{\left\|\dy \times \ddy\right\|}{\left\|\dy\right\|^3}
 \end{equation*}
-\hfill $\Box$
+\end{proof}
 
 
 \subsection{Signed curvature and the turning number}
@@ -476,7 +476,7 @@ and therefore
 If $\gamma$ is a unit-speed curve, then $\ddot\gamma \perp \dot\gamma$.
 \end{lem}
 
-\emph{Proof:} $\left\|\dot\gamma\right\| = 1 \Rightarrow \left\langle\dot\gamma, \dot\gamma\right\rangle = 1 \Rightarrow \frac{d}{dt} \left\langle\dot\gamma, \dot\gamma\right\rangle = 0 \Rightarrow 2 \left\langle\ddot\gamma, \dot\gamma\right\rangle = 0 \Rightarrow \dot\gamma \perp \ddot\gamma$ \hfill $\Box$
+\begin{proof} $\left\|\dot\gamma\right\| = 1 \Rightarrow \left\langle\dot\gamma, \dot\gamma\right\rangle = 1 \Rightarrow \frac{d}{dt} \left\langle\dot\gamma, \dot\gamma\right\rangle = 0 \Rightarrow 2 \left\langle\ddot\gamma, \dot\gamma\right\rangle = 0 \Rightarrow \dot\gamma \perp \ddot\gamma$ \end{proof}
 
 
 \begin{figure}[H]
@@ -788,7 +788,7 @@ Now, with this knowledge we can take the dot-product of $\overrightarrow{KP} = (
 \overrightarrow{KP} \cdot \overrightarrow{KF} = -k^2 + \frac{4}{4}k^2 = 0
 \end{equation*}
 
-Thus, the tangent and the focal line are indeed perpendicular. \hfill $\Box$
+Thus, the tangent and the focal line are indeed perpendicular.
 
 \item \emph{Show that if two tangents meet on the directrix $y = -\frac{1}{4}$, then they are perpendicular.}
 
@@ -826,7 +826,7 @@ This is a simple integral using a rather rare trig identity, which however can b
 &= \int_0^{2\pi} 2 \sin\left(\frac{t}{2}\right) dt \\
 &= 2 \cdot 2 \cos\left(\frac{t}{2}\right)\Bigg|_0^{2\pi} = 8
 \end{align*}
-\hfill $\Box$
+
 
 \item \emph{Compute the curvature of the cycloid at each point. How does the curvature behave near the singular points?}
 
@@ -866,7 +866,7 @@ Using the substitution $x = sin(t)$ with $dt = \frac{1}{\sqrt{1-x^2}} ~dx$ we ge
 4 \mathcal L(\gamma) &= 4a \int_0^1 \frac{\sqrt{1 - k^2 x^2}}{\sqrt{1 - x^2}} ~dx
 \end{align*}
 
-\hfill $\Box$
+
 
 \end{enumerate}
 
@@ -878,12 +878,12 @@ Using the substitution $x = sin(t)$ with $dt = \frac{1}{\sqrt{1-x^2}} ~dx$ we ge
 \begin{thm}
 
 \end{thm}
-\emph{Proof:} trivial \hfill $\Box$
+\begin{proof} trivial \end{proof}
 
 \begin{lem}
 
 \end{lem}
-\emph{Proof:} trivial \hfill $\Box$
+\begin{proof} trivial \end{proof}
 
 
 \begin{exmp}
