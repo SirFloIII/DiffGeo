@@ -1,0 +1,65 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file '1_5.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{566.92913386bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.25)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ue_img/1_5.pdf}}%
+    \put(0.0292356,0.10462932){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_1$}}}%
+    \put(0.25909624,0.11259807){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_2$}}}%
+    \put(0.38063872,0.17122175){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_3$}}}%
+    \put(0.20092922,0.07511292){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\gamma_1^{pre}$}}}%
+    \put(0.1152979,0.04859362){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\gamma_2^{pre}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ue_img/1_5.pdf}}%
+    \put(0.58414909,0.1046293){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_1$}}}%
+    \put(0.81400977,0.11259813){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_2$}}}%
+    \put(0.93555223,0.17122181){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_3$}}}%
+    \put(0.75584277,0.07521365){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\gamma_1^{post}$}}}%
+    \put(0.67093587,0.04941887){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\gamma_2^{post}$}}}%
+  \end{picture}%
+\endgroup%

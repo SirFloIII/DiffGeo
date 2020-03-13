@@ -1,0 +1,186 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{article}
+%\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\setlength{\droptitle}{-60pt}
+
+
+\begin{document}
+\author{Florian Bogner}
+\title{Differential Geometry - Exercise 1}
+\maketitle
+
+\begin{enumerate}
+
+\item
+\begin{enumerate}
+\item \emph{Show that every tangent to the parabola $y=x^2$ is perpendicular to the line through the focus $F := (0, \frac{1}{4})$ and the intersection point of the tangent with the $x$-axis.}
+
+Let $K := (k, 0)$ be the intersection point of the tangent with the $x$-Axis and let $P := (p, p^2)$ be the point where the  tangent touches the parabola. Let us find a connection between $k$ and $p$. The slope of the tangent on the one hand is known by the derivative of the parabola at $p$ and on the other hand is known by the slope triangle formed by $K$, $P$ and $(p,0)$. Thus it must hold that:
+
+\begin{equation*}
+2p = \frac{p^2}{p-k}
+\end{equation*}
+
+Rearranging this equation gives us our desired connection:
+
+\begin{equation*}
+p = 2k
+\end{equation*}
+
+Now, with this knowledge we can take the dot-product of $\overrightarrow{KP} = (p-k, p^2) = (k, 4k^2)$ and $\overrightarrow{KF} = (-k, \frac{1}{4})$.
+
+\begin{equation*}
+\overrightarrow{KP} \cdot \overrightarrow{KF} = -k^2 + \frac{4}{4}k^2 = 0
+\end{equation*}
+
+Thus, the tangent and the focal line are indeed perpendicular.
+
+\item \emph{Show that if two tangents meet on the directrix $y = -\frac{1}{4}$, then they are perpendicular.}
+
+Let $a$ and $b$ be tangent points of the parabola. We then have the following tangent equations:
+\begin{align*}
+	t_a(x)&=2a\cdot (x-a)+a^2\\
+	t_b(x)&=2b\cdot (x-b)+b^2
+\end{align*}
+For the scalar product of the tangent vectors we have
+\begin{equation*}
+\begin{pmatrix}
+1 \\ 2a\end{pmatrix} \cdot \begin{pmatrix} 1 \\ 2b\end{pmatrix}=4ab+1
+\end{equation*}
+We thus have to show that $4ab+1=0$.
+
+Since both tangents should meet on the directrix we have
+\begin{align*}
+	2a(x-a)+a^2&=-\frac{1}{4} \Leftrightarrow x=-\frac{1}{8a}+\frac{a}{2} \\
+	2b(x-b)+b^2&=-\frac{1}{4} \Leftrightarrow x=-\frac{1}{8b}+\frac{b}{2}\\
+\end{align*}
+as well as
+\begin{equation*}
+	-\frac{1}{8a}+\frac{a}{2} = -\frac{1}{8b}+\frac{b}{2} \Leftrightarrow 4ab+1=0
+\end{equation*}
+\end{enumerate}
+
+\item \emph{Compute the length of one arc of the cycloid.}
+
+This is a simple integral using a rather rare trig identity, which however can be easily derived from the more common one: $\sin(t)^2 = \frac{1}{2} - \frac{1}{2}\cos(2t)$.
+\begin{align*}
+\mathcal L(\gamma) &= \int_0^{2\pi} \left\| \dot\gamma \right\| ~dt \\
+&= \int_0^{2\pi} \sqrt{(1-\cos t)^2 + \sin^2 t} ~dt \\
+&= \int_0^{2\pi} \sqrt{1 - 2\cos t + \cos^2 t + \sin^2 t} ~dt \\
+&= \int_0^{2\pi} \sqrt{2 - 2\cos t} dt \\
+&= \int_0^{2\pi} 2 \sin\left(\frac{t}{2}\right) ~dt \\
+&= 2 \cdot 2 \cos\left(\frac{t}{2}\right)\Bigg|_0^{2\pi} = 8
+\end{align*}
+
+
+\item \emph{Compute the curvature of the cycloid at each point. How does the curvature behave near the singular points?}
+
+This is best done by referencing the Theorem for the curvature of an arbitrary cuve from the lecture.
+
+\begin{align*}
+\kappa(t) &= \frac{\left\|\dot\gamma \times \ddot\gamma\right\|}{\left\|\dot\gamma\right\|^3} \\
+&= \frac{|\cos t - \cos^2 t - \sin^2 t|}{(2 - 2\cos t)^{\frac{3}{2}}} \\
+&= \frac{1}{2^{\frac{3}{2}}} \frac{1 - \cos t}{(1 - \cos t)^{\frac{3}{2}}} \\
+&= \frac{1}{2^{\frac{3}{2}}} \frac{1}{\sqrt{1 - \cos t}}
+\end{align*}
+
+Note that as $t$ approaches a multiple of $2\pi$, where the singular points are located, the denominator tends to $0$ and thus the curvature approaches $\infty$.
+
+
+
+\item \emph{Show that the perimeter of the ellipse with half-axes $a>b$ is equal to }
+
+\begin{equation*}
+4a \int_0^\frac{\pi}{2} \sqrt{1 - k^2 \sin^2t} ~dt = 4a \int_0^1 \frac{\sqrt{1 - k^2 x^2}}{\sqrt{1 - x^2}} ~dx
+\end{equation*}
+
+\emph{where $k = \sqrt{1 - \frac{b^2}{a^2}}$ is the eccentricity of the ellipse. (This integral is called the complete elliptic integral of the second kind.)}
+
+We will consider only the upper right quarter of the ellipse, but count it 4 times because of symmetry. Consider the parametrization $\gamma(t) = (a \sin(t), b \cos(t))$ for $t \in (0, \frac{\pi}{2})$.
+
+\begin{align*}
+4 \mathcal L(\gamma) &= 4 \int_0^\frac{\pi}{2} \sqrt{a^2 \cos^2t + b^2\sin^2t} ~dt \\
+&= 4a \int_0^\frac{\pi}{2} \sqrt{\cos^2t + \frac{b^2}{a^2}\sin^2t} ~dt \\
+&= 4a \int_0^\frac{\pi}{2} \sqrt{1 - \left(1 - \frac{b^2}{a^2}\right)\sin^2t} ~dt \\
+&= 4a \int_0^\frac{\pi}{2} \sqrt{1 - k^2 \sin^2t} ~dt 
+\end{align*}
+
+Using the substitution $x = sin(t)$ with $dt = \frac{1}{\sqrt{1-x^2}} ~dx$ we get our result. Note that the fact that the parameter space is only $(0, \frac{\pi}{2})$ is important now, as $\sin t$ has to be monotonic in the interval for the substitution to be legal. 
+
+\begin{align*}
+4 \mathcal L(\gamma) &= 4a \int_0^1 \frac{\sqrt{1 - k^2 x^2}}{\sqrt{1 - x^2}} ~dx
+\end{align*}
+
+
+
+\item \emph{Show that the turning number $T$ of a generic immersed closed curve can be computed as follows. Orient the curve arbitrarily. Then replace the neighborhood of each intersection point by two disjoining arcs as shown in the figure. \\ The curve decomposes into a collection of simple oriented curves. Let $I_+$ be the number of counterclockwise oriented curves, and $I_-$ the number of clockwise oriented ines. Then $T = T_+ + I_-$.}
+
+First let us expand our definition of turning number to collections of curves. We define the turning number of a collection of curves to be the sum of the individual turning numbers. There immediatly are two obvious facts about this definition:
+
+\begin{itemize}
+\item The Turning Number of a singleton set $\{\gamma\}$ is the same as the one of $\gamma$.
+\item The Turning Number of a collection of simple oriented curves is indeed the count of the counterclockwise curves minus the count of the clockwise curves, as they have Turning Number $1$ and $-1$ respectivly.
+\end{itemize}
+
+Recall that the Turning Number is the result of integrating the signed curvature along the curve. This fits neatly into our definition of the Turning Number for a collection of curves. If we cut a curve into segments, the collection of the segments has the same Turning Number as the original curve.
+
+Thus all that is left to show is that the turning number of a collection does not change if we replace an intersection point by the construction in the figure. 
+
+\begin{figure}[H]
+\centering
+\def\svgwidth{0.8\textwidth}
+\input{ue_img/1_5.pdf_tex}
+%\caption{Bla}
+%\label{fig:bla}
+\end{figure}
+
+We decompose the collection into the following segments:
+\begin{itemize}
+\item The part ``left'' and ``right'' of the Intersection with Turning Number $T_1$ and $T_2$ respectivly.
+\item All other curves uninvolved with Turning Number $T_3$.
+\item The two paths $\gamma_1^{pre}$ and $\gamma_2^{pre}$, which will be replaced by $\gamma_1^{post}$ and $\gamma_2^{post}$.
+\end{itemize}
+
+Since both the pre- and the post- paths are mirrors of each other, their total curvatures are the negation of each other. Thus:
+
+\begin{equation*}
+T^{pre} = T_1 + T_2 + T_3 + T(\gamma_1^{pre}) + T(\gamma_2^{pre}) = T_1 + T_2 + T_3 + T(\gamma_1^{post}) + T(\gamma_2^{post}) = T^{post}
+\end{equation*}
+
+\qed
+
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
