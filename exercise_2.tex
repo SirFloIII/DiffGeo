@@ -1,0 +1,156 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{article}
+%\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\usepackage{fancyvrb} % for "\Verb" macro
+\VerbatimFootnotes    % enable use of \Verb in footnotes
+
+
+\DeclareMathOperator{\sgn}{sgn}
+
+\setlength{\droptitle}{-60pt}
+
+\newcommand{\ez}{\qed}
+
+%https://latex.org/forum/viewtopic.php?t=23443
+\makeatletter
+\renewcommand{\dddot}[1]{%
+   {\mathop{#1\hspace{0pt}}\limits^{\vbox to-1.5\ex@{\kern-\tw@\ex@
+    \hbox {\normalfont .\kern-.1em.\kern-.1em.}\vss}}}}
+\renewcommand{\ddddot}[1]{%
+   {\mathop{#1\hspace{0pt}}\limits^{\vbox to-1.5\ex@{\kern-\tw@\ex@
+    \hbox{\normalfont\clap{.\kern-.1em.\kern-.1em.\kern-.1em.}}\vss}}}}
+\makeatother
+
+\begin{document}
+\author{Florian Bogner}
+\title{Differential Geometry - Exercise 2}
+\maketitle
+\begin{enumerate}
+\item \emph{Compute the Frenet-Serret frame, the curvature, and the torsion of the helix}
+\begin{equation*}
+\gamma(t) = \left(a \cos t, a \sin t, bt \right) .
+\end{equation*}
+The helix has constant speed $c := \sqrt{a^2 + b^2}$, so with $s := ct$
+\begin{equation*}
+\zeta(s) := \gamma\left(\frac{s}{c}\right) = \left( a \cos\frac{s}{c}, a \sin\frac{s}{c}, \frac{bs}{c} \right)
+\end{equation*}
+is a unit speed reparametrisation. The Frenet-Serret frame of $\gamma$ is of course the same as the one of $\zeta$, which is (assuming $a \neq 0$):
+\begin{align*}
+T(s) &= \dot\zeta(s) = \left(-\frac{a}{c} \sin\frac{s}{c}, \frac{a}{c} \cos\frac{s}{c}, \frac{b}{c} \right) \\
+N(s) &= \frac{\ddot\zeta(s)}{\left\| \ddot\zeta(s) \right\|} =  \left(-\sgn(a)\cos\frac{s}{c}, - \sgn(a)\sin\frac{s}{c}, 0 \right)\\
+B(s) &= T(s) \times N(s) =  \left( \frac{\sgn(a)\cdot b}{c} \sin \frac{s}{c}, -\frac{\sgn(a)\cdot b}{c} \cos \frac{s}{c} , \frac{|a|}{c} \right)
+\end{align*}
+The curvature $\kappa$ is
+\begin{equation*}
+\kappa(s) = \left\| \ddot\zeta(s) \right\| = \frac{|a|}{c^2}
+\end{equation*}
+and by the third FS-formula the torsion $\tau$ is
+\begin{equation*}
+\tau(s) = - \frac{\dot B}{N} = \frac{b}{c^2}.
+\end{equation*}
+
+\item \emph{Let $\gamma$ be a unit-speed curve in $\mathbb R^3$. With the help of the Frenet-Serret formulas find the components of the vector $\dddot\gamma$ in the Frenet-Serret frame. Derive from this formula\footnote{Yo, Mister Tutor, check out \url{https://latex.org/forum/viewtopic.php?t=23443} for a non-ugly \Verb+dddot+.}}
+\begin{equation*}
+\tau = \frac{\det(\dot\gamma, \ddot\gamma, \dddot\gamma)}{\kappa^2}
+\end{equation*}
+Using the first and then the second FS-formula we have
+\begin{equation*}
+\dddot\gamma = \ddot T = \dot\kappa N + \kappa\dot N = \dot\kappa N - \kappa^2T + \kappa\tau B
+\end{equation*}
+Thus, in the FS-frame there are the following coordinate expressions:
+\begin{align*}
+\dot\gamma &= (1, 0, 0) \\
+\ddot\gamma &= (0, \kappa, 0) \\
+\dddot\gamma &= (-\kappa^2, \dot\kappa, \kappa\tau)
+\end{align*}
+Since the canonical basis as well as the FS-frame are right-handed ONBs and the determinant is invariant under tranformation between those, we get
+\begin{equation*}
+\det(\dot\gamma, \ddot\gamma, \dddot\gamma) = 1\cdot\kappa\cdot\kappa\tau
+\end{equation*}
+Division by $\kappa^2$ gives us the desired formula. \ez
+
+
+
+\item \emph{Let $\gamma$ be a unit speed curve in $\mathbb R^n$. For any $\epsilon \in \mathbb R$ consider the curve $\gamma^\epsilon(t) = \gamma(t) + \epsilon\dot\gamma(t)$.}
+
+\begin{enumerate}
+\item \emph{Show that the curve $\gamma^\epsilon$ is regular.}
+
+For $\gamma^\epsilon$ to be regular means $\dot\gamma^\epsilon = \dot\gamma(t) + \epsilon\ddot\gamma(t) \neq 0$ everywhere. Since $\gamma$ is a unit speed curve the first summand $\dot\gamma(t)$ is not zero and also perpendicular from the second summand $\epsilon\ddot\gamma(t)$. Thus, for any choice of $\epsilon$ they cannot cancel each other out. \ez
+
+\item \emph{Show that $\gamma^\epsilon$ is at least as long as $\gamma$.} 
+
+By the same perpendicularity argument from (a) and since a cathetus of a right triangle is smaller then the hypotenuse we can reason:
+\begin{align*}
+L(\gamma^\epsilon) &= \int_a^b \left\|\dot\gamma(t) + \epsilon\ddot\gamma(t)\right\| dt \\
+&\geq \int_a^b \left\|\dot\gamma(t) \right\| dt \\
+&= L(\gamma)
+\end{align*}
+\ez
+\end{enumerate}
+
+\item \emph{Let $\gamma$ be a space curve contained in the unit sphere $\left\{ p \in \mathbb R^3 \middle| \left\| p \right\| = 1 \right\}$. Show that the curvature of $\gamma$ is at least 1 at every point.}
+
+Let us without loss of generality assume that $\gamma$ is a unit speed curve. Since $\gamma$ lives in the unit sphere, we have
+\begin{align*}
+\left\langle \gamma, \dot\gamma \right\rangle &= 1 \\
+\frac{d}{dt} \left\langle \gamma, \dot\gamma \right\rangle &= \frac{d}{dt} 1 \\
+\left\langle \dot\gamma, \dot\gamma \right\rangle + \left\langle \gamma, \ddot\gamma \right\rangle &= 0 \\
+1 + \left\langle \gamma, \ddot\gamma \right\rangle &= 0
+\end{align*}
+With the inequality of Cauchy-Schwarz we get
+\begin{equation*}
+1 = |\left\langle \gamma, \ddot\gamma \right\rangle| \leq \left\| \gamma \right\| \cdot \left\| \ddot\gamma \right\| = 1 \cdot \kappa
+\end{equation*}
+
+\ez
+
+\item First, we have to figure out which track belongs to the front wheel and which to the back wheel. When looking at a curve, the back wheel is the inner track. When looking at serpentine tracks, the back wheel is the one with lesser amplitude.
+
+Then we lay tangents on the back track and look at the intersections with the front track. The bike travels in the direction where the distance to an intersection is mostly constant. I say ``mostly'' because due to the angled steering column and the front wheel being mounted in front of the axis of rotation of the steering column, the wheel base in real life bikes is not constant and varies a bit with angle of lean and steering.
+
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
