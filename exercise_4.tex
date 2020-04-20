@@ -1,0 +1,187 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{article}
+%\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\setlength{\droptitle}{-60pt}
+
+
+\begin{document}
+\author{Florian Bogner}
+\title{Differential Geometry - Exercise 4}
+\maketitle
+
+\begin{enumerate}
+\item \emph{Let $U \subset \mathbb R^2$ be an open subset, and $f: U\to\mathbb R$ be a smooth function. Show that $G\left(f\right)$, the graph of $f$ is a smooth surface according to Definition 2.1 from the lecture notes.}
+\begin{itemize}
+
+\item Method 1:
+Let $V = W = U \times \mathbb R$. Define $\phi:V \mapsto W:\left(x,y,z\right)\to\left(x,y,z-f\left(x,y\right)\right)$. This is a straightening map for every point $p \in G\left(f\right)$.
+
+\item Method 2:
+We use Theorem 2.2, which states a $M$ is a smooth surfaces if for every point $p \in M$ there exists a neighborhood $V \subset \mathbb R^3$ of $p$ and a smooth function $F: V\to\mathbb R$ with nowhere vanishing gradient such that $V\cap M = F^{-1}\left(0\right)$.
+
+Let $p := G\left(f\right) \in M$ be an arbitrary point. Let $V := U\times\mathbb R$ and $F: V\to\mathbb R : \left(x,y,z\right) \mapsto z-f\left(x,y\right)$. $V$ is indeed a open neighborhood of $p$. $F$ is smooth since $f$ is smooth, subtraction is smooth and composition of smooth functions is smooth. $\frac{dF}{dz} = 1$ so the gradient of $F$ is nowhere vanishing. And finally $F\left(u,v,f\left(u,v\right)\right) = f\left(u,v\right)-f\left(u,v\right) = 0$, so indeed $V\cap M = F^{-1}\left(0\right)$.
+\end{itemize}
+\qed
+
+
+\item \emph{Compute the first fundamental form of the helicoid}
+\begin{equation*}
+\sigma\left(u,v\right) = \left(v\cos u,v\sin u, u\right). 
+\end{equation*}
+\emph{Show that the families of curves}
+\begin{equation*}
+u = t+a, v = \sinh t ~\text{and}~ u = t+b, v = -\sinh t
+\end{equation*}
+\emph{form an orthogonal net on the helicoid (that is, curves of the first family intersect curves of the second family orthogonally.)}
+
+We can compute the first fundamental form with the partial derivatives of $\sigma$:
+\begin{align*}
+\sigma_u &= \left(v \sin u, v \cos u, 1\right) \\
+\sigma_v &= \left(\cos u, -\sin v, 0\right) \\
+E = \langle\sigma_u, \sigma_u\rangle &= v^2 + 1 \\
+F = \langle\sigma_u, \sigma_v\rangle &= 0 \\
+G = \langle\sigma_v, \sigma_v\rangle &= 1
+\end{align*}
+Let $a, b$ be arbitrary but fixed. This fixes two curves $\gamma_1\left(t_1\right)$ and $\gamma_2\left(t_2\right)$, who meet if
+\begin{equation*}
+t_1+a = t_2+b ~\text{and}~ \sinh t_1 = - \sinh t_2
+\end{equation*}
+Solving this system of equations yields
+\begin{equation*}
+t_1 = -t_2 ~\text{and}~ t_1 = \frac{b-a}{2} ~\left(\text{and}~ t_2 = \frac{a-b}{2}\right)
+\end{equation*}
+Now we know where the curves intersect, so we compute their directions at that point as well as their dot-product.
+\begin{align*}
+\gamma_1\left(t_1\right) &= \left(\sinh t_1 \cos\left(t_1+a\right), \sinh t_1 \sin\left(t_1+a\right), t_1+a\right) \\
+\dot\gamma_1\left(t_1\right) &= \left(\cosh t_1 \cos\left(t_1+a\right) - \sinh t_1 \sin\left(t_1+a\right), \cosh t_1 \sin\left(t_1+a\right) + \sinh t_1 \cos\left(t_1+a\right), 1\right) \\
+\gamma_2\left(t_2\right) &= \left(-\sinh t_2 \cos\left(t_2+b\right), -\sinh t_2 \sin\left(t_2+b\right), t_2+b\right) \\
+\dot\gamma_2\left(t_2\right) &= \left(-\cosh t_2 \cos\left(t_2+b\right) + \sinh t_2 \sin\left(t_2+b\right), -\cosh t_2 \sin\left(t_2+b\right) - \sinh t_2 \cos\left(t_2+b\right), 1\right)
+\end{align*}
+Note that at the intersection we have $t_1+a = \frac{a+b}{2} = t_2+b$. Thus we define $c:=\frac{a+b}{2}$ and $t := t_1 = -t_2$.
+\begin{align*}
+\dot\gamma_1\left(t\right) &= \left(\cosh t \cos c - \sinh t \sin c, \cosh t \sin c + \sinh t \cos c, 1\right) \\
+\dot\gamma_2\left(t\right) &= \left(-\cosh t \cos c - \sinh t \sin c, -\cosh t \sin c + \sinh t \cos c, 1\right) \\
+\dot\gamma_1\left(t\right)\cdot\dot\gamma_2\left(t\right) &= \sinh^2t\sin^2c - \cosh^2t\cos^2c + \sinh^2t\cos^2c - \cosh^2t\sin^2c + 1 \\
+&= \left(\sinh^2t - \cosh^2t\right)\cdot\left(\sin^2c+\cos^2c\right) + 1 = -1 \cdot 1 + 1 = 0
+\end{align*}
+The dot-product is zero therefore the curves are orthogonal. \qed
+
+\item \emph{Compute the first fundamental form and the area element of a surface of revolution parametrized as in Example 2.12 of the lecture notes.}
+
+Let $f$ and $g$ be smooth functions. The surface of revolution is
+\begin{equation*}
+\sigma\left(u,v\right) = \left(f\left(u\right) \cos v, f\left(u\right)\sin v, g\left(u\right)\right)
+\end{equation*}
+The first fundamental form is again computed with the partial derivatives.
+\begin{align*}
+\sigma_u &= \left(f'\left(u\right) \cos v, f'\left(u\right) \sin v, g'\left(u\right)\right) \\
+\sigma_v &= \left(-f\left(u\right) \sin v, f\left(u\right) \cos v, 0\right) \\
+E = \langle\sigma_u, \sigma_u\rangle &= f'\left(u\right)^2 + g'\left(u\right)^2 \\
+F = \langle\sigma_u, \sigma_v\rangle &= 0 \\
+G = \langle\sigma_v, \sigma_v\rangle &= f\left(u\right)^2
+\end{align*}
+The area element is of course:
+\begin{align*}
+dA = \sqrt{EG-F^2}~dudv &= \sqrt{\left(f'\left(u\right)^2 + g'\left(u\right)^2\right)\cdot f\left(u\right)^2-0} ~dudv \\
+&= \sqrt{f'\left(u\right)^2 + g'\left(u\right)^2}\cdot |f\left(u\right)| ~dudv
+\end{align*}
+
+\item \emph{Compute the area of the surface of revolution obtained by rotating about the $z$-axis the circle of radius $r$ in the $xz$-plane with the center $\left(R,0,0\right)$. (We assume $r < R$.)}
+
+We parametrisize the circle with $\left(u,v\right) \in U := \left[0,2\pi\right)^2$
+\begin{align*}
+f\left(u\right) &= r\cos u + R \\
+g\left(u\right) &= r\sin u
+\end{align*}
+Using Exp. 3 gives us the area element.
+\begin{equation*}
+dA = r \cdot |r\cos u + R| ~dudv = r^2\cos u + rR ~dudv
+\end{equation*}
+The surface then is:
+\begin{align*}
+\int_U ~dA &= \int_0^{2\pi}\int_0^{2\pi} r^2\cos u + rR ~dudv \\
+&= 2\pi \int_0^{2\pi} r^2\cos u + rR ~du \\
+&= 4\pi^2 rR \\
+&= \left(2\pi r\right)\left(2\pi R\right)
+\end{align*}
+Thus, the surface is the product of the perimeters of the small circle and the ``average'' big circle, which is pretty neat.
+
+\item \emph{Show that the following tow conditions on a surface patch $\sigma$ with the first fundamental form $Edu^2 + 2Fdudv + gdv^2$ are equivalent:}
+\begin{enumerate}
+\item \emph{$E_v = G_u = 0$}
+\item \emph{The opposite sides of any quadrilateral formed by parameter curves of $\sigma$ have the same length.}
+\end{enumerate}
+\emph{Show further that a surface with these properties has a reparametrization into coordinates $\left(s,t\right)$ with the first fundamental form $ds^2 + 2\cos \theta dsdt + dt^2$}
+
+\begin{figure}[H]
+\centering
+\def\svgwidth{0.4\textwidth}
+\input{ue_img/4_5.pdf_tex}
+%\caption{Bla}
+%\label{fig:bla}
+\end{figure}
+
+\begin{itemize}
+\item (a) $\Rightarrow$ (b)
+
+Let us parametrize these opposite sides along the $u$ direction with
+\begin{align*}
+t &\in [0, 1] \\
+u\left(t\right) &= u_0 + t\left(u_1-u_0\right) \\
+v\left(t\right) &= v_0\text{ or }v\left(t\right) = v_1
+\end{align*}
+Then we have $\dot v = 0$ and combined with $E_v = 0$ implying $E\left(u\left(t\right), v_0\right) = E\left(u\left(t\right), v_1\right)$ we get
+\begin{align*}
+\mathcal L\left(\sigma\left(u\left(t\right), v_0\right)\right) &= \int_0^1 \sqrt{E\left(u\left(t\right), v_0\right)\dot u + 0 + 0}~dt \\
+&= \int_0^1 \sqrt{E\left(u\left(t\right), v_1\right)\dot u + 0 + 0}~dt \\
+&= \mathcal L\left(\sigma\left(u\left(t\right), v_1\right)\right)
+\end{align*}
+The sides along the $v$ direction are analogue.
+
+\item (b) $\Rightarrow$ (a)
+
+Let u be parametrized by the itself on $[u_0, u_1]$. Since the length of the side is constant we have
+\begin{align*}
+0 = \frac{d}{dv} \mathcal L\left(\sigma\left(u, v\right)\right) &= \frac{d}{dv} \int_{u_0}^{u_1} \sqrt{E\left(u, v\right)}~du \\
+&= \int_{u_0}^{u_1} \frac{d}{dv} \sqrt{E\left(u, v\right)}~du \\
+&= \int_{u_0}^{u_1} -\frac{E_v\left(u, v\right)}{\sqrt{E\left(u, v\right)}} ~du
+\end{align*}
+Since the integral is zero for every interval, the integrand has to be zero almost everywhere, but because it is smooth it has to be zero everywhere and therefore $E_v = 0$. The case for $G_u$ is analogue.
+\end{itemize}
+
+Let $v_0$ be fixed. We can find $u\left(s\right)$ such that $\gamma_1\left(s\right) := \sigma\left(u\left(s\right), v0\right)$ is a unit speed curve. Then, let $s_0$ be fixed. Again, we can find $v\left(t\right)$ such that $\gamma_2\left(t\right) := \sigma\left(u\left(s_0\right), v\left(t\right)\right)$ is a unit speed curve. We can do these steps because of theorem 1.9. Now, let $\sigma^*\left(s,t\right) := \sigma\left(u\left(s\right), v\left(t\right)\right)$. Because of the quadrilateral property, every gridline, not just the $s_0$ and $t_0 := v^{-1}\left(v_0\right)$ one is a unit speed curve. Therefore:
+\begin{align*}
+\sigma^*_s\left(s,t\right) &= \frac{\sigma_u\left(u\left(s\right), v\left(t\right)\right)}{\left\|\sigma_u\left(u\left(s\right), v\left(t\right)\right)\right\|} \\
+\sigma^*_t\left(s,t\right) &= \frac{\sigma_v\left(u\left(s\right), v\left(t\right)\right)}{\left\|\sigma_v\left(u\left(s\right), v\left(t\right)\right)\right\|} \\
+E^* = \left\langle\sigma^*_s\left(s,t\right), \sigma^*_s\left(s,t\right)\right\rangle &= 1 \\
+F^* = \left\langle\sigma^*_s\left(s,t\right), \sigma^*_t\left(s,t\right)\right\rangle &= \frac{\left\langle\sigma_u\left(u\left(s\right), v\left(t\right)\right), \sigma_v\left(u\left(s\right), v\left(t\right)\right)\right\rangle}{\left\|\sigma_u\left(u\left(s\right), v\left(t\right)\right)\right\|\cdot\left\|\sigma_v\left(u\left(s\right), v\left(t\right)\right)\right\|} \\
+&= \cos \sphericalangle\left(\sigma^*_s\left(s,t\right), \sigma^*_t\left(s,t\right)\right) =: \cos \theta\\
+G^* = \left\langle\sigma^*_t\left(s,t\right), \sigma^*_t\left(s,t\right)\right\rangle &= 1 \\
+\end{align*}
+\qed
+
+
+\end{enumerate}
+
+\end{document}
