@@ -33,11 +33,176 @@
 \begin{enumerate}
 \item \emph{Let $\sigma: U \to M$ be a surface patch, and let $\tau = \sigma \circ \phi: V \to M$ be a reparametrization of $\sigma$ by a diffeomorphism $\phi: V \to U$. Further let $\binom{EF}{FG}$ be the matrix of the symmetric bilinear form $\sigma^*(I^M)$. Express the matrix of the symmetric bilinear form $\tau^*(I^M)$ in terms of $\sigma^*(I^M)$ and the Jacobian matrix of $\phi$.}
 
+Let $(a,b) \in V$ and let $\binom{E^*F^*}{F^*G^*}$ denote the matrix of the symmetric bilinear form $\tau^*(I^M)$. Also for ease of notation let the arguments of $\sigma$ and its derivatives be $(u,v) := \phi(a, b) =: (\phi_1, \phi_2)$. Finally, let $J$ be the Jacobian of $\phi$.
+\begin{align*}
+\tau_a &= (\sigma_u, \sigma_v) \cdot \binom{\phi_{1,a}}{\phi_{2,a}} \\
+\tau_b &= (\sigma_u, \sigma_v) \cdot \binom{\phi_{1,b}}{\phi_{2,b}} \\
+(\tau_a, \tau_b) &= (\sigma_u, \sigma_v) \cdot J \\
+E^* = \langle\tau_a, \tau_a\rangle &= (\phi_{1,a},\phi_{2,a}) \cdot \langle(\sigma_u, \sigma_v),(\sigma_u, \sigma_v)\rangle \cdot \binom{\phi_{1,a}}{\phi_{2,a}} \\
+&= (\phi_{1,a},\phi_{2,a}) \cdot \binom{E~F}{F~G} \cdot \binom{\phi_{1,a}}{\phi_{2,a}} \\
+F^* = \langle\tau_a, \tau_b\rangle &= (\phi_{1,a},\phi_{2,a}) \cdot \binom{E~F}{F~G} \cdot \binom{\phi_{1,b}}{\phi_{2,b}} \\
+G^* = \langle\tau_b, \tau_b\rangle &= (\phi_{1,b},\phi_{2,b}) \cdot \binom{E~F}{F~G} \cdot \binom{\phi_{1,b}}{\phi_{2,b}}
+\end{align*}
+Finally:
+\begin{equation*}
+\binom{E^*F^*}{F^*G^*} = J^T \cdot \binom{E~F}{F~G} \cdot J
+\end{equation*}
+\qed
+
+\item
+\begin{enumerate}
+\item \emph{Recall that a symmetric bilinear form $\alpha$ is called degenerate if there is
+$v$ such that $\alpha(v,w) = 0$ for all $w$. Let $\alpha: W \times W \to \mathbb R$ be a symmetric
+bilinear form on $W$, and $F : V \to W$ be a linear map. Show: if
+$\ker F \neq \{0\}$, then the form $F^*\alpha$ is degenerate.}
+
+Suppose $u \in \ker F, u \neq 0$. Then, since $\alpha$ is bilinear:
+\begin{equation*}
+F^*\alpha(u,v) = \alpha(F(u), F(v)) = \alpha(0, F(v)) = 0 ~~~~ \forall v\in W
+\end{equation*}
+\qed
+
+\item \emph{Let $F : V \to W$ and $G: W \to U$ be linear maps between vector spaces,
+and let $\alpha: U \times U \to R$ be a symmetric bilinear form on $U$. Show:}
+\begin{equation*}
+(G \circ F)^* \alpha = F^*(G^*\alpha).
+\end{equation*}
+
+Just use Definition 2.32 three times, lol.
+\begin{multline*}
+(G \circ F)^*\alpha(u,v) = \alpha((G \circ F)(u), (G \circ F)(v)) =\\= \alpha(G(F(u)), G(F(v))) = G^*\alpha(F(u), F(v)) = F^*(G^*\alpha)(u,v).
+\end{multline*}
+\qed
+\end{enumerate}
+
+\item \emph{The surface path}
+\begin{equation*}
+\sigma^0(u,v) = (\cosh u \cos v, \cosh u \sin v, u)
+\end{equation*}
+\emph{parametrizes the catenoid (the surface of revolution obtained from the catenary). The surface patch}
+\begin{equation*}
+\sigma^1(u,v) = (-\sinh u \sin v, \sinh u \cos v, -v)
+\end{equation*}
+\emph{parametrizes a helicoid (make sure that you see the rulings). As the domain for both patches take $\mathbb R \times (0,2\pi)$. Put}
+\begin{equation*}
+\sigma^t(u,v) = \sigma^0(u,v) \cos t + \sigma^1(u,v) \sin t, ~~~ 0 \leq t \leq \frac{\pi}{2}
+\end{equation*}
+\emph{Show that for all $t$ the map $\sigma^0(u,v) \mapsto \sigma^t(u,v)$ is a path isometry.}
+
+Corollary 2.34 basically tells us to compare the matrices associated with the first fundamental forms. Since $\sigma^t = \sigma^0$ for $t = 0$ it suffices to calculate the one associated with $\sigma^t$ and if it is independent of $t$ the map is indeed a path isometry. Since calculating by hand is boring and error-prone and it is getting late, we ask the Computer Algebra System $sympy$ to do it. We have technology.\footnote{\url{https://www.youtube.com/watch?v=Q6ctb-Pb3lc}} The code is on the last page.
+\begin{align*}
+E^t = \langle\sigma^t_u, \sigma^t_u\rangle &= \cosh^{2}{\left (u \right )} \\
+F^t = \langle\sigma^t_u, \sigma^t_v\rangle &= 0 \\
+G^t = \langle\sigma^t_v, \sigma^t_v\rangle &= \cosh^{2}{\left (u \right )}
+\end{align*}
+It is indeed independent of $t$. \qed
+
+\item \emph{Show that the surface of revolution}
+\begin{equation*}
+\sigma(u,v) = (f(u) \cos v, f(u) \sin v, g(u))
+\end{equation*}
+\emph{can be conformally parametrized by $(v,w)$ where $w = w(u)$. \\ Compute the substituition $w$ for the geographic parametrization of the sphere:}
+\begin{equation*}
+\sigma(u,v) = (\sin u \cos v, \sin u \sin v, \cos v)
+\end{equation*}
+\emph{Additional question: why is this parametrization useful for Google Maps?}
+
+Theorem 2.45 tells us to look at the first fundamental form matrices. We calculated them last exercise in example 3. To be conformal we need
+\begin{equation*}
+\left(\begin{matrix}
+f'(u)^2 + g'(u)^2 & 0 \\
+0 & f(u)^2
+\end{matrix}\right) = \lambda(p) \cdot \left(\begin{matrix} 1 & 0 \\ 0 & 1 \end{matrix}\right)
+\end{equation*}
+Let $u$ be a function $u(w)$. This leads us to the following differential equation for $u(w)$:
+\begin{equation*}
+\left(f'(u)\cdot u'\right)^2 + \left(g'(u)\cdot u'\right)^2 = f(u)^2
+\end{equation*}
+or alternativly:
+\begin{equation*}
+u' = \frac{f\left(u\right)}{\sqrt{f'\left(u\right)^2 + g'\left(u\right)^2}}
+\end{equation*}
+Since $f > 0$ and smooth and therefore locally Lipschitz and all that jazz this can be solved with a suitable starting value $u(w_0) = u_0$. Since both the enumerator and the denominator and therefore $u'$ is positive, the solution $u$ is monotonically growing and therefore bijective. The inverse function $w(u)$ therefore exists.\footnote{Did you mean to write $u = u(w)$ in the Angabe? This would make more sense to me.}
+
+The parametrization $(v, w) \mapsto (f(u(w)) \cos v, f(u(w)) \sin v, g(u(w)))$ is therefore by construction conformal.
+
+For the sphere the differential equation becomes
+\begin{equation*}
+u' = \frac{\sin u}{1}
+\end{equation*}
+The solution is, according to \emph{Wolfram Alpha}
+\begin{align*}
+u(w) &= 2 \cot^{-1}\left(e^{-w}\right) \\
+w(u) &= -\ln\cot\frac{u}{2}
+\end{align*}
 
 
+
+
+
+About Google Maps: This is basically the Mercator projection. As Google Maps is most predominantly used for large scale maps (i.e. zoomed in), you would want a projection that minimizes local distortion, i.e. square cityblocks should look like squares, not oblique rhomboids. But this is directly a consequence of being conform. Another requirement is that north should always point up. With these two requirements the Mercator projection is basically the only one left. 
+
+\item 
+
+\item No. Follows from 7 and the existence of the sphere. \qed
+
+\item
 
 
 \end{enumerate}
+
+\newpage
+
+\begin{verbatim}
+import sympy as sp
+from sympy import sin, cos, sinh, cosh, diff
+
+class Vec3:
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def __add__(self, other):
+        return Vec3(self.x + other.x,
+                    self.y + other.y,
+                    self.z + other.z)
+        
+    def __mul__(self, scalar):
+        return Vec3(scalar * self.x,
+                    scalar * self.y,
+                    scalar * self.z)
+
+    def diff(self, var):
+        return Vec3(diff(self.x, var),
+                    diff(self.y, var),
+                    diff(self.z, var))
+        
+    def dot(self, other):
+        return self.x * other.x + self.y * other.y + self.z * other.z
+
+sp.init_printing(forecolor = 'White')
+u, v, t = sp.symbols("u v t")
+
+sig0 = Vec3( cosh(u) * cos(v),
+             cosh(u) * sin(v),
+             u )
+sig1 = Vec3(-sinh(u) * sin(v),
+             sinh(u) * cos(v),
+            -v )
+sigt = sig0 * cos(t) + sig1 * sin(t)
+
+sigt_u = sigt.diff(u)
+sigt_v = sigt.diff(v)
+
+E = sigt_u.dot(sigt_u)
+F = sigt_u.dot(sigt_v)
+G = sigt_v.dot(sigt_v)
+
+print(sp.latex(sp.simplify(E)))
+print(sp.latex(sp.simplify(F)))
+print(sp.latex(sp.simplify(G)))
+\end{verbatim}
 
 
 \end{document}
