@@ -1,0 +1,87 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{article}
+%\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\DeclareMathOperator{\grad}{grad}
+
+
+\setlength{\droptitle}{-60pt}
+
+
+\begin{document}
+\author{Florian Bogner}
+\title{Differential Geometry - Exercise 7}
+\maketitle
+
+
+\begin{enumerate}
+\item \begin{enumerate}
+\item Let $\gamma$ be a unit speed parametrisation of a given straight line. Obviously $\ddot\gamma = 0$. By Definition 3.21. we have
+\begin{equation*}
+0 = \ddot\gamma = \kappa_n N + \kappa_g N\times\dot\gamma
+\end{equation*}
+Since $N$ and $N\times\dot\gamma$ are orthogonal and thus linearly independent both coefficients, but especially $\kappa_g$, are zero. Thus $\gamma$ is indeed geodesic. \qed
+\item Without loss of generality assume the plane $P$ is a linear subspace. (Move the coordinate system so the zero-point is in the plane if necessary.) Then $\gamma \in P$ implies $\dot\gamma \in P$ as well as $\ddot\gamma \in P$. Since $N\in P$ we have $N\times\dot\gamma \notin P$. Again by definition 3.21.
+\begin{equation*}
+\ddot\gamma = \kappa_n N + \kappa_g N\times\dot\gamma \in P
+\end{equation*}
+implies that $\kappa_g N\times\dot\gamma \in P$, which is only possible if $\kappa_g = 0$. \qed
+\end{enumerate}
+
+\item $\gamma$ being geodesic means $\kappa_g = 0$. With Theorem 3.22. we have that $\gamma$ being asympotic implies $\kappa_n = II(\dot\gamma, \dot\gamma) = 0$. Thus 
+\begin{align*}
+\ddot\gamma &= \kappa_n N + \kappa_g N\times\dot\gamma \\
+&= 0 \cdot N + 0 \cdot N\times\dot\gamma \\
+&= 0
+\end{align*}
+Therefore $\gamma = \int\int 0 ~dt~dt = x_0 + t\cdot v_0$ is a straight line. \qed
+
+\item 2hard4me
+
+\item Let $I = [a,b]$ and let $\gamma^*$ be an arbitrary path with the same start and end point as $\gamma$, i.e. $\gamma(a) = \gamma^*(a)$ and $\gamma(b) = \gamma^*(b)$. We write the Energy creatively as a path integral and then, because $\grad f$ is obviously a gradient field and path integrals of gradient fields only depend on start and endpoint, we can swap out $\gamma$ with $\gamma^*$:
+\begin{align*}
+2 E(\gamma) &= \int_a^b \|\dot\gamma\|^2 ~dt \\
+&= \int_a^b \dot\gamma \cdot \dot\gamma ~dt \\
+&= \int_a^b \grad f \cdot \dot\gamma ~dt \\
+&= \int_a^b \grad f \cdot \dot\gamma^* ~dt \\
+&\leq \int_a^b \|\grad f\| \cdot \|\gamma^*\| ~dt ~~~\text{by Cauchy-Schwarz} \\
+&= \int_a^b 1 \cdot \|\gamma^*\| ~dt \\
+&= L(\gamma^*)
+\end{align*}
+Generalizing Lemma 4.5. for arbitrary intervals we get:
+\begin{equation*}
+L(\gamma)^2 \leq 2(a-b)E(\gamma)
+\end{equation*}
+Combining this with the fact that $L(\gamma) = b-a$ as $\gamma$ is a unit speed curve we get:
+\begin{equation*}
+L(\gamma) = \frac{L(\gamma)^2}{b-a} \leq 2E \leq L(\gamma^*)
+\end{equation*}
+Thus the length of every other path is longer than the one following the gradient of $f$. \qed
+
+
+
+
+\end{enumerate}
+
+
+\end{document}

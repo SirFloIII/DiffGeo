@@ -1,0 +1,94 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{article}
+%\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\setlength{\droptitle}{-60pt}
+
+
+\begin{document}
+\author{Florian Bogner}
+\title{Differential Geometry - Exercise 12}
+\maketitle
+
+
+\begin{enumerate}
+\item Nope.
+
+\item Thank you, lecture notes!
+\begin{align*}
+\nabla_X\omega(Y) - \nabla_Y\omega(X) &= D_X\langle\omega, Y\rangle - \omega(\nabla_X Y) - D_Y\langle\omega, X\rangle + \omega(\nabla_Y X) &\text{by eq. (42)} \\
+&= D_X\langle\omega, Y\rangle - D_Y\langle\omega, X\rangle - \omega(\nabla_X Y + \nabla_Y X) &\text{linearity of }\omega \\
+&= D_X\langle\omega, Y\rangle - D_Y\langle\omega, X\rangle - \omega([X, Y]) &\text{torsion-free} \\
+&= d\omega(X, Y) &\text{Lemma 5.59}
+\end{align*}
+\qed
+
+\item Oof.
+
+\item We will prove the equivalent statement:
+\begin{multline*}
+D_X(g(Y,Z)) + D_Y(g(Z,X)) - D_Z(g(X,Y)) = 2 g(\nabla_X Y, Z) - g([Z, X], Y) \\- g([X, Y], Z) + g([Y, Z], X)
+\end{multline*}
+For the summands of the right-hand side we have the metric property:
+\begin{align*}
+D_X(g(Y,Z)) &= g(\nabla_X Y, Z) + g(Y, \nabla_X Z) \\
+D_Y(g(Z,X)) &= g(\nabla_Y Z, X) + g(Z, \nabla_Y X) \\
+- D_Z(g(X,Y)) &= - g(\nabla_Z X, Y) - g(X, \nabla_Z Y)
+\end{align*}
+Thus, using the bilinearity and symmetry of $g$ and  we have
+\begin{align*}
+RHS &= g(\nabla_X Y, Z) + g(Y, \nabla_X Z) + g(\nabla_Y Z, X) + g(Z, \nabla_Y X) - g(\nabla_Z X, Y) - g(X, \nabla_Z Y) \\
+&= g(\nabla_Y Z - \nabla_Z Y, X) - g(\nabla_Z X - \nabla_X Z, Y) + g(\nabla_X Y + \nabla_Y X, Z) \\
+&= g([Y, Z], X) - g([Z, X], Y) + g(- \nabla_X Y + \nabla_Y X + 2 \nabla_X Y, Z) \\
+&= g([Y, Z], X) - g([Z, X], Y) - g([X, Y], Z) + 2 g(\nabla_X Y, Z)
+\end{align*}
+\qed
+
+\end{enumerate}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

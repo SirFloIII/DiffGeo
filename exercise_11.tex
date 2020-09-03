@@ -1,0 +1,165 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{article}
+%\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\setlength{\droptitle}{-60pt}
+
+
+\begin{document}
+\author{Florian Bogner}
+\title{Differential Geometry - Exercise 11}
+\maketitle
+
+
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item Lemma 5.55 with $\alpha := \beta := \omega$ and $r := q$ yields
+\begin{equation*}
+\omega \wedge \omega = (-1)^{q^2} \omega \wedge \omega = -\omega \wedge \omega
+\end{equation*}
+Therefore $\omega \wedge \omega = 0$. \qed
+\item Let $e_1, e_2, e_3, e_4$ be a basis of $\Omega^1(\mathbb R^4)$. Let $\omega := (e_1 \wedge e_2)+(e_3 \wedge e_4)$. Then
+\begin{equation*}
+\omega \wedge \omega = 2 (e_1 \wedge e_2 \wedge e_3 \wedge e_4) \neq 0
+\end{equation*}
+\end{enumerate}
+
+\item \emph{Disclaimer:} This is probably a false solution as I actually disprove what is to be proven. I still want to show my thought process though as I cannot find an error in my reasoning.
+
+Step 1: What is $dx$? Definition 5.58 of $d$ tells us $dx$ is the differential of $x$. The differential as defined in 2.28 is
+\begin{equation*}
+dx_p(v) = \frac{d(x\circ \gamma)}{dt}(t_0)
+\end{equation*}
+with $\gamma(t_0) = p$ and $\dot\gamma(t_0) = v$. Let us set $t_0 = 0$ and $\gamma(t) = p + t\cdot v$. Then 
+\begin{equation*}
+dx_p(v) = \frac{d(x(p + t\cdot v))}{dt}(0) = x(v)
+\end{equation*}
+So $dx$ is the functional that reads the $x$-coordinate of a vector. $dy$ and $dz$ are analogue.
+
+Step 2: What is $dx \wedge dy$? Example 5.54 tells us
+\begin{equation*}
+(dx \wedge dy)(v, w) = dx(v)dy(w) - dx(w)dy(v)
+\end{equation*}
+If we write $v$ and $w$ in the $xyz$-basis, we can write this bilinear form in matrix style.
+\begin{equation*}
+(dx \wedge dy)(v, w) = v^T \cdot
+\left[ {\begin{array}{rrr}
+   0 & 1 & 0 \\
+  -1 & 0 & 0 \\
+   0 & 0 & 0 \\
+\end{array} } \right] \cdot w
+\end{equation*}
+The other combinations are analogue.
+
+Step 3: What is $\omega$? For every point $p = (x,y,z)$ there is a bilinear form $\omega_p$ which we can again write in matrix form.
+\begin{equation*}
+\omega_p(v, w) = v^T \cdot
+\left[ {\begin{array}{rrr}
+   0 & z &-y \\
+  -z & 0 & x \\
+   y &-x & 0 \\
+\end{array} } \right] \cdot w
+\end{equation*}
+Let us call that matrix B. (Note that for every bilinear form $\sigma$ on $\mathbb R^3$ there exits a point $p$ such that $\sigma = \omega_p$.) We can write the pullback under a rotation $A$ as
+\begin{equation*}
+A^*\omega_p(v, w) = \omega_p(Av, Aw) = (Av)^T \cdot B \cdot Aw = v^T \cdot A^T B A \cdot w
+\end{equation*}
+We thus have to show that $A^T B A = B$ (or equivalently $A^{-1} B A = B$). But pick your favorite rotation matrix and you will see this is not the case.\footnote{\url{https://www.wolframalpha.com/input/?i=\%28\%280\%2C0\%2C1\%29\%2C\%281\%2C0\%2C0\%29\%2C\%280\%2C1\%2C0\%29\%29\%5E-1+*+\%28\%280\%2C+z\%2C-y\%29\%2C\%28-z\%2C0\%2Cx\%29\%2C\%28y\%2C-x\%2C0\%29\%29+*+\%28\%280\%2C0\%2C1\%29\%2C\%281\%2C0\%2C0\%29\%2C\%280\%2C1\%2C0\%29\%29}}
+
+\item Because mixing postfix and prefix notation is extremely messy and in music sharps and flats are prefixed anyway, I redefine them as $\flat X := X^\flat$ and $\sharp \omega := \omega^\sharp$. This allows us to skip brackets altogether. Screw you, Marcel Berger.
+\begin{enumerate}
+\item
+\begin{itemize}
+\item Gradient:
+\begin{align*}
+\sharp df &= \sharp(\frac{\partial f}{\partial x_1} dx^1 + \frac{\partial f}{\partial x_2} dx^2 + \frac{\partial f}{\partial x_3} dx^3) \\
+&= \frac{\partial f}{\partial x_1} \partial_1 + \frac{\partial f}{\partial x_2} \partial_2 + \frac{\partial f}{\partial x_3} \partial_3 \\
+&= (\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \frac{\partial f}{\partial x_3}) \\
+&= \text{grad} f
+\end{align*}
+\item Divergence:
+\begin{align*}
+{\ast}d{\ast}\flat X &= {\ast}d{\ast}\flat (a~\partial_1 + b~\partial_2 + c~\partial_3) \\
+&= {\ast}d{\ast} (a~dx^1 + b~dx^2 + c~dx^3) \\
+&= {\ast}d(a(dx^2\wedge dx^3) + b(dx^3\wedge dx^1) + c(dx^1\wedge dx^2)) \\
+&= {\ast}( da \wedge dx^2 \wedge dx^3 + a \wedge d(dx^2 \wedge dx^3) + ...) \\
+&= {\ast}((\frac{\partial a}{\partial x_1} dx^1 + \frac{\partial a}{\partial x_2} dx^2 + \frac{\partial a}{\partial x_3} dx^3) \wedge dx^2 \wedge dx^3 + 0 + ... )\\
+&= {\ast}(\frac{\partial a}{\partial x_1} dx^1 \wedge dx^2 \wedge dx^3 + ...) \\
+&= \frac{\partial a}{\partial x_1} + \frac{\partial b}{\partial x_2} + \frac{\partial c}{\partial x_3} = \text{div} X
+\end{align*}
+\item Curl:
+\begin{align*}
+\sharp{\ast}d\flat X &= \sharp{\ast}d(a~dx^1 + b~dx^2 + c~dx^3) \\
+&= \sharp{\ast}(da \wedge dx^1 + a \wedge ddx^1 + ...) \\
+&= \sharp{\ast}((\frac{\partial a}{\partial x_1} dx^1 + \frac{\partial a}{\partial x_2} dx^2 + \frac{\partial a}{\partial x_3} dx^3) \wedge dx^1 + 0 + ...) \\
+&= \sharp{\ast}(\frac{\partial a}{\partial x_3} dx^3 \wedge dx^1 - \frac{\partial a}{\partial x_2} dx^1 \wedge dx^2 + ...) \\
+&= \sharp( \frac{\partial a}{\partial x_3} dx^2 - \frac{\partial a}{\partial x_2} dx^3 + ...) \\
+&= \frac{\partial a}{\partial x_3} \partial_2 - \frac{\partial a}{\partial x_2} \partial_3 + \frac{\partial b}{\partial x_1} \partial_3 - \frac{\partial b}{\partial x_3} \partial_1 + \frac{\partial c}{\partial x_2} \partial_1 - \frac{\partial c}{\partial x_1} \partial_2 \\
+&= (\frac{\partial c}{\partial x_2} - \frac{\partial b}{\partial x_3}, \frac{\partial a}{\partial x_3} - \frac{\partial c}{\partial x_1}, \frac{\partial b}{\partial x_1} - \frac{\partial a}{\partial x_2}) \\
+&= \text{curl} X
+\end{align*}
+\end{itemize}
+\item
+\begin{align*}
+\text{curl}(\text{grad}f) &= \text{curl}(\sharp df) \\
+&= \sharp{\ast} d\flat\sharp df \\
+&= \sharp{\ast} ddf \\
+&= \sharp{\ast} 0 \\
+&= 0 \\
+\text{div}(\text{curl}f) &= \text{div}(\sharp{\ast} d\flat X) \\
+&= {\ast} d {\ast} \flat\sharp{\ast} d\flat X \\
+&= {\ast} d {\ast}{\ast} d\flat X \\
+&= {\ast} d d\flat X \\
+&= {\ast} 0 \\
+&= 0
+\end{align*}
+\qed
+\end{enumerate}
+
+\item Nope.
+
+\end{enumerate}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

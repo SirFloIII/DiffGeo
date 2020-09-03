@@ -1,0 +1,116 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{article}
+%\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\setlength{\droptitle}{-60pt}
+\newcommand{\s}{\item S.}
+
+%https://latex.org/forum/viewtopic.php?t=23443
+\makeatletter
+\newcommand{\mydddot}[1]{%
+   {\mathop{#1\hspace{0pt}}\limits^{\vbox to-1.5\ex@{\kern-\tw@\ex@
+    \hbox {\normalfont .\kern-.1em.\kern-.1em.}\vss}}}}
+\renewcommand{\ddddot}[1]{%
+   {\mathop{#1\hspace{0pt}}\limits^{\vbox to-1.5\ex@{\kern-\tw@\ex@
+    \hbox{\normalfont\clap{.\kern-.1em.\kern-.1em.\kern-.1em.}}\vss}}}}
+\makeatother
+
+\begin{document}
+\author{Florian Bogner \& Johannes Gams}
+\title{Fehler im Diffgeoskript von Ivan Izmestiev, SS20}
+\maketitle
+
+
+\begin{itemize}
+\s 2: Beweisidee und Example 1.7 fehlen
+\s 3: Es steht nur ``(picture of lemniscate)'' da.
+\s 6: ``Examples of curves with the turning number 2 and 0.'' aber keine Examples.
+\s 7: ... does ... turn. $\rightarrow$ ... turns.
+\s 8: in (1): $\langle \dot N, B \rangle = - \tau ~\rightarrow~ \langle \dot N, B \rangle = \tau$
+\s 8: in 1.24: Der \verb+\dddot+ Befehl ist gebugt. Auf \url{https://latex.org/forum/viewtopic.php?t=23443} gibt es Abhilfe. Vergleiche: $\det(\dot\gamma, \ddot\gamma, \dddot\gamma)$ vs. $\det(\dot\gamma, \ddot\gamma, \mydddot\gamma)$
+\s 9: Letzte Zeile: $\kappa$ and $\tau$ $\rightarrow$ $f$ and $g$
+\S 10: Fenchel und folgende: space curve $\rightarrow$ closed space curve
+\s 10: in 1.31: Beweis: $e_1 \rightarrow T$, $v^\circ \rightarrow C_v$
+\s 11: oben: a great circles $\rightarrow$ a great circle
+\s 11: in 1.36: $\dot\gamma_s ~\rightarrow~ \dot\gamma_\varepsilon$ zwei mal
+\s 11: in 1.37: knick $\rightarrow$ kink $oder$ sharp bend
+\s 18: in 1.55: Beweis: Warum können wir von einem \emph{arc-length parameter} $s$ ausgehen? Was ist wenn $\ddot \gamma = 0$ und damit $\dot\delta = 0$? Dann wären die Vorraussetzungen für Thm.~1.9 nicht gegeben. Sollte nicht ähnlich zu Thm.~1.56 \emph{nowhere vanishing curvature} in den Vorraussetzungen sein?
+\s 20: ober 1.60: parametrizatin $\rightarrow$ parametrization
+\s 28: in 2.11: Aus Konsistenzgründen sollten hier $(u,v)$ statt $(x,y)$ als Koordinaten verwendet werden.
+\s 36: nach (8): $(u^1(t_0), v^1(t_0)) ~\rightarrow~ (u^1(t_0), u^2(t_0))$
+\s 37: über 2.33: $I_q^N(dF_p(X), dF_q(X)) ~\rightarrow~ I_q^N(dF_p(X), dF_p(Y))$
+\s 38: in 2.33: Beweis: Rückrichtung: Das beweist doch nur $\langle X, X\rangle = \langle dF(X), dF(X) \rangle$ und nicht das geforderte $\langle X, Y\rangle = \langle dF(X), dF(Y) \rangle$. 
+\s 39: nach 2.35: develepability $\rightarrow$ developability
+\s 43: in 2.45: Beweis unten: In der Wurzel: $\beta(e_1, e_2) ~\rightarrow~ \beta(e_1, e_1)$
+\s 55: oben: $\kappa_1 = \dot f \ddot g - \ddot g \dot g ~\rightarrow~ \kappa_1 = \dot f \ddot g - \ddot f \dot g$
+\s 56: in 3.22: Beweis: $\|\ddot\gamma\| ~\rightarrow~ \|\ddot\gamma_\theta\|$
+\s 57: in 3.25: Beweis: $T_{N(p)} S^2 ~\rightarrow~ T_{N(p)} \mathbb S^2$
+\s 58: in 3.28: ... $M$ is convex, that is lies on ... $\rightarrow$ ... $M$ is convex, that is it lies on ...
+\s 58: in 3.29: Beweis: Hier wird $\det(dN^{-1})$ mit $\det S^{-1}$ substituiert, aber $S = - dN$. Das Vorzeichen geht einfach verloren.
+\s 59: in 3.32: $i \neq 0 ~\rightarrow~ i \neq j$
+\s 60: in 3.34: Beweis: ... centered at $a$. $\rightarrow$ ... centered at $\kappa^{-1} a$.
+\s 62: in 3.28: Beweis: Hier wird $\det(A+B) = \det(A) + 2\det(A, B) + \det(B)$ verwendet. Das sollte man vielleicht erwähnen, da diese Formel nicht allzubekannt ist. Desweiteren verschwindet der $-2tf\det II$ Term, der ja nicht (ohne weitere Begründung) in $o(t)$ hineingezogen werden kann.
+\s 64: in 4.5: Beweis: Auf der rechten Seite von Cauchy-Schwarz fehlt das Quadrat.
+\s 69: in 4.15: Beweis: $G = f(u) ~\rightarrow~ G = f(u)^2$
+\s 74: oben: $\|\dot \rho\| ~\rightarrow~ |\dot\rho|$ da $\dot\rho$ ein Skalar ist.
+\s 76: unten: Anlehnung an Exercise 6.1, sollte man ausbessern, falls das Skriptum für zukünftige Semester wiederverwendet wird.
+\s 83: Vor dem Unterkapitel 4.10 ist ein \verb+\newpage+, aber bei anderen Unterkapiteln ist das nicht so.
+\s 95: diferent $\rightarrow$ different
+\s 98: ... in the sequel. $\rightarrow$ Continuing onwards ... (Es ist wahrscheinlich nichtgemeint, dass in erst \emph{DiffGeo II: Electric Boogaloo} alle Vektorfelder glatt sind.)
+\s 102: $x \cdot [\partial_x, \partial y] ~\rightarrow~ x \cdot [\partial_x, \partial_y]$
+\s 102: in 5.36: $\mathbb R ~\rightarrow~ Z$
+\s 104: nach 5.40: $v \otimes w \in V \times W ~\rightarrow~ v \otimes w \in V \otimes W$
+\s 109: is a choice a $(r, s)$-tensor $\rightarrow$ is a choice of an $(r, s)$-tensor
+\s 111: unten: Was ist $F$? Ist es $\varphi^{-1}$?
+\s 113: $d(\frac{x}{x^2+y^2})dy ~\rightarrow~ d(\frac{x}{x^2+y^2})\wedge dy$ und für den zweiten Term analog
+\s 113: in 5.61: $r \sin \theta (\cos \theta dr + r \cos \theta d\theta) ~\rightarrow~ r \sin \theta (\cos \theta dr - r \sin \theta d\theta)$
+\s 113: closeness $\rightarrow$ closedness
+\s 114: unten: $d(h: \varphi) ~\rightarrow~ d(h\circ \varphi)$ (?)
+\s 116: Kapitel 6 startet nicht auf einer neuen Seite, anders als alle vorherigen Kapitel.
+\s 124: am Ende des Eindeutigkeitsbeweises: $A(X,Y,Z) = 0 ~\rightarrow~ A^\flat(X,Y,Z) = 0$
+\s 126: in 6.20: $f \in \mathbb C^\infty(M) ~\rightarrow~ f \in C^\infty(M)$
+
+
+
+
+
+\end{itemize}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

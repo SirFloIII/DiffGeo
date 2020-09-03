@@ -1,0 +1,95 @@
+\documentclass[a4paper,11pt,notitlepage,fullpage]{article}
+%\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+%\usepackage[ngerman]{babel}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage{amsthm}
+\usepackage{cite}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage{titling}
+\usepackage{color}
+
+\setlength{\droptitle}{-60pt}
+
+
+\begin{document}
+\author{Florian Bogner}
+\title{Differential Geometry - Exercise 10}
+\maketitle
+
+
+\begin{enumerate}
+\item From page 101 in the lecture notes we know that we can identify $X, Y, Z$ with their corresponding derivations and write those as:
+\begin{align*}
+D_X &= u^1 \frac{\partial}{\partial x^1} + u^2 \frac{\partial}{\partial x^2} \\
+D_Y &= v^1 \frac{\partial}{\partial x^1} + v^2 \frac{\partial}{\partial x^2} \\
+D_Z &= w^1 \frac{\partial}{\partial x^1} + w^2 \frac{\partial}{\partial x^2}
+\end{align*}
+with $u^i, v^i, w^i \in C^\infty(\mathbb R^2)$. Let $u^1(x^1, x^2) = x^2$ and $w^2(x^1,x^2) = x^1$ as well as $u^2 = v^1 = v^2 = w^1 = 0$.
+The commutators are then
+\begin{align*}
+[X, Y] &= [X, 0] = 0 \\
+[Y, Z] &= [0, Z] = 0 \\
+[X, Z] &= \sum_{j=1}^2 \sum_{i=1}^2 \left(u^i \frac{\partial w^j}{\partial x^i} - w^i \frac{\partial u^j}{\partial x^i}\right) \frac{\partial}{\partial x^j} \\
+&= x^2 \frac{\partial}{\partial x^2} - x^1 \frac{\partial}{\partial x^1} \neq 0
+\end{align*}
+Letting $Y = 0$ might be cheesy, but it is technically legal, the best kind of legal.\qed
+
+\item Let $t$ be said linear map:
+\begin{align*}
+t:~ &\mathbb R^{V^*\times V} \to \mathbb R \\
+&\sum_i a_i (l_i,v_i) \mapsto \sum_i a_i \langle l_i,v_i\rangle
+\end{align*}
+Note: on the left is a formal linear combination of basis vectors of $\mathbb R^{V^*\times V}$, on the right is a plain sum in $\mathbb R$.
+\begin{enumerate}
+\item $\Omega$ is defined to be the linear hull of four types of elements. Since $t$ is linear, it suffices to show that these elements vanish under $t$.
+\begin{align*}
+t\left(\left(l_1 + l_2, v\right) - \left(l_1, v\right) - \left(l_2, v\right)\right) &=
+\langle l_1 + l_2, v\rangle - \langle l_1, v\rangle - \langle l_2, v\rangle \\
+&= \langle 0, v \rangle = 0 \\
+t\left(\left(l, v_1 + v_2\right) - \left(l, v_1\right) - \left(l, v_2\right)\right) &=
+\langle l, v_1 + v_2\rangle - \langle l, v_1\rangle - \langle l, v_2\rangle \\
+&= \langle l, 0 \rangle = 0 \\
+t\left( \left( \lambda l, v\right) - \lambda \left( l, v\right) \right) &=
+\langle \lambda l, v \rangle - \lambda \langle l, v \rangle \\
+&= (\lambda - \lambda) \cdot \langle l, v \rangle = 0 \\
+t\left( \left( l, \lambda v\right) - \lambda \left( l, v\right) \right) &=
+\langle l, \lambda v \rangle - \lambda \langle l, v \rangle \\
+&= (\lambda - \lambda) \cdot \langle l, v \rangle = 0 \\
+\end{align*}
+It all essentially follows from the bilinearity of the canonical pairing. The universal property of the Tensor Product now guarantees us that the unique existence of a function $\tilde t =: tr$:
+\begin{align*}
+tr:~ V^* &\otimes V \to \mathbb R \\
+l &\otimes v \mapsto \langle l, v \rangle
+\end{align*}
+
+\item Just calculate:
+\begin{align*}
+tr(A) &= tr(a_j^i e_i \otimes \eta^j) \\
+&= a_j^i tr(e_i \otimes \eta^j) &\text{by linearity of }tr \\
+&= a_j^i \langle e_i, \eta^j \rangle &\text{by definition of }tr \\
+&= a_j^i \delta_i^j &\text{by definition of dual basis} \\
+&= a_i^i &\text{by summation along the diagonal}
+\end{align*}
+\qed
+\end{enumerate}
+
+\item Hilbert's third problem as an exercise, nice. 
+
+\end{enumerate}
+
+
+\end{document}
